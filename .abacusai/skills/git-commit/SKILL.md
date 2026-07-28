@@ -25,6 +25,24 @@ When asked to generate a commit message:
 6. If multiple unrelated changes are detected, recommend splitting them into separate commits.
 7. Generate the final commit message.
 
+## Triggers
+
+Keywords and phrases that should trigger this skill:
+
+- "commit message"
+- "generate commit"
+- "create commit message"
+- "conventional commit"
+- "write a commit"
+
+## Best Practices
+
+- Be specific and actionable in commit messages
+- Keep commits atomic and focused
+- Use clear, descriptive language
+- Follow semantic versioning principles
+- Reference related issues when appropriate
+
 ## Conventional Commit Format
 
 <type>(<scope>): <description>
@@ -148,3 +166,48 @@ Do not explain your reasoning.
 Do not use Markdown.
 
 Do not wrap the output in code blocks.
+
+## Notes
+
+- This skill only generates commit messages, it does not perform git operations
+- Always verify that generated messages follow the defined rules
+- When in doubt about scope, prefer omitting it
+- Consider the target audience when choosing commit detail level
+
+## Examples
+
+Example 1: Adding a new authentication feature
+
+Generated commit message:
+
+```
+feat(auth): add JWT token validation
+
+Implement JWT payload verification with signature validation.
+Add middleware to protect authenticated routes.
+Handle expired and invalid tokens with appropriate error responses.
+```
+
+Example 2: Fixing a bug in user registration
+
+Generated commit message:
+
+```
+fix(auth): prevent duplicate email registration
+
+Add unique constraint check before creating new users.
+Return clear error message when email already exists.
+Update existing tests to cover duplicate registration scenario.
+```
+
+Example 3: Refactoring database queries
+
+Generated commit message:
+
+```
+fix(users): optimize database queries for user list
+
+Replace N+1 queries with single joined query.
+Add database indexes on frequently queried fields.
+Improve response time from 500ms to 150ms.
+```
