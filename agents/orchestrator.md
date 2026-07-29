@@ -30,6 +30,8 @@ Main engineering flow coordinator for the AI Pack. Responsible for **coordinatin
 
 **Internet Access Rule**: Whenever the orchestrator or any delegated agent needs to access the internet for research, documentation lookup, or any web-based information gathering, it MUST use the `deep-research` skill. Never fetch URLs directly without going through the deep-research workflow.
 
+**Skill Router**: When the user asks "which skill should I use?" or is unsure which workflow fits, load the `ask-matt` skill to route them to the appropriate skill/flow.
+
 ## Available Agent Map
 
 ### Core Agents
@@ -99,12 +101,12 @@ Request → Research → Grill Plan → Planning → Architecture → Implementa
 ```
 
 1. **Research** (if needed) — Load `deep-research` skill, research best practices, patterns, and documentation for the technology involved
-2. **Grill the Plan** — Load `grill-me` skill, interview user to align on scope before coding
+2. **Grill the Plan** — Load `grill-with-docs` skill (preferred) or `grill-me` skill (non-code), interview user to align on scope and build shared language
 3. **Analysis and Planning** — Delegate to `planner`
 4. **Architecture Review** — Delegate to `architect`
-5. **Implementation** — Delegate to `backend` or framework-specific agent
+5. **Implementation** — Delegate to `backend` or framework-specific agent (or use `implement` skill for spec-driven work)
 6. **Testing** — Delegate to `tdd` and `e2e`
-7. **Code Review** — Delegate to `code-reviewer` + framework-specific reviewer
+7. **Code Review** — Delegate to `code-reviewer` + framework-specific reviewer (or use `code-review` skill)
 8. **QA / Bug Hunting** — Delegate to `qa-agent` (adversarial testing, edge cases)
 9. **Database Review** — Delegate to `database-reviewer` (if applicable)
 10. **API Review** — Delegate to `api-reviewer` (if applicable)
@@ -119,7 +121,7 @@ Request → Research → Grill Plan → Planning → Architecture → Implementa
 Request → Diagnosis → Fix Plan → Fix → Testing → QA Validation → Review → Report
 ```
 
-1. **Diagnosis** — Analyze the problem, identify root cause
+1. **Diagnosis** — Analyze the problem, identify root cause (use `diagnosing-bugs` skill for hard bugs)
 2. **Fix Plan** — Define the fix approach
 3. **Fix** — Delegate to backend or framework-specific build resolver
 4. **Testing** — Delegate to `tdd` (add regression test)
@@ -152,6 +154,29 @@ Request → Review → Feedback → Fixes → Validation → Report
 4. **Validation** — Re-review to confirm fixes
 5. **Report** — Document issues found and resolved
 
+### Main Flow: Idea → Ship (mattpocock workflow)
+
+```
+Request → Grill with Docs → (Prototype?) → (To Spec?) → To Tickets → Implement → Done
+```
+
+Reference: Load `ask-matt` skill for full flow routing.
+
+1. **Grill the idea** — Load `grill-with-docs` skill, sharpen the idea through interview. Builds shared language in CONTEXT.md and ADRs. (For non-code ideas, use `grill-me`)
+2. **Prototype (if needed)** — Load `prototype` skill, build throwaway code to answer design questions. Use `handoff` between sessions
+3. **Spec (if multi-session)** — Load `to-spec` skill, turn the conversation into a spec/PRD
+4. **Break into tickets** — Load `to-tickets` skill, split spec into tracer-bullet tickets with blocking edges
+5. **Implement** — Load `implement` skill, which drives `tdd` and `code-review` internally per ticket
+6. **Commit** — After review, commit the work
+
+**When to detour from the main flow:**
+- **Bugs piling up** → Load `triage` skill to triage incoming issues
+- **Hard bug** → Load `diagnosing-bugs` skill (reproduce → minimise → hypothesise → instrument → fix → regression-test)
+- **Huge foggy effort** → Load `wayfinder` skill for multi-session exploration via decision tickets
+- **Codebase decay** → Load `improve-codebase-architecture` skill to scan for deepening opportunities
+- **Domain confusion** → Load `domain-modeling` skill to sharpen terms and update CONTEXT.md/ADRs
+- **Merge conflicts** → Load `resolving-merge-conflicts` skill to resolve by intent
+
 ### Research Flow (Internet Access)
 
 ```
@@ -171,6 +196,27 @@ Request → Load deep-research → Plan Research → Execute Search → Deep-Rea
 - Need to find best practices for a technology
 - Competitive analysis or technology evaluation
 - Any question requiring synthesis from multiple sources
+
+### Watch Video Flow (claude-video)
+
+```
+Request → Load claude-video skill → Provide URL/path + question → Download → Extract Frames → Transcribe → Analyze → Answer
+```
+
+1. **Load Skill** — Load `claude-video` skill
+2. **Provide input** — User provides a video URL (YouTube, TikTok, Loom, etc.) or local file path + a question
+3. **Download** — `yt-dlp` downloads the video (or pulls captions only at `transcript` detail)
+4. **Extract frames** — `ffmpeg` extracts frames (keyframes or scene-aware, configurable detail)
+5. **Transcribe** — Pulls native captions (free) or falls back to Whisper API
+6. **Analyze** — Claude reads frames as images + timestamped transcript to answer the question
+7. **Cleanup** — Temporary files are removed
+
+**When to Trigger:**
+- User pastes a YouTube/video URL and asks about its content
+- Debugging from a screen recording
+- Need to summarize a video, talk, or lecture
+- Need UI/UX feedback from a recorded interaction
+- Analyzing competitor content, ads, or tutorials
 
 ### MCP Setup Flow
 
@@ -193,7 +239,7 @@ Request → Load mcp-setup skill → Identify needed servers → Configure → V
 
 ### When to Use Each Agent
 
-| Situation                | Agent(s)                                                     |
+| Situation                | Agent(s) / Skill(s)                                          |
 | ------------------------ | ------------------------------------------------------------ |
 | New complex feature      | `planner` → `architect` → `backend`                          |
 | Simple bug               | `backend` directly                                           |
@@ -219,6 +265,26 @@ Request → Load mcp-setup skill → Identify needed servers → Configure → V
 | UI/UX / design-to-code   | `ui-ux-designer`                                             |
 | Figma design to code     | `ui-ux-designer` (requires Figma MCP)                       |
 | Research topic           | Load `deep-research` skill → execute research flow           |
+| Which skill to use?      | Load `ask-matt` skill — router over all user skills           |
+| Grill with docs          | Load `grill-with-docs` skill — sharpens ideas + builds docs   |
+| Turn conversation to spec| Load `to-spec` skill — synthesizes spec/PRD from discussion   |
+| Break plan into tickets  | Load `to-tickets` skill — creates tracer-bullet tickets       |
+| Implement from spec      | Load `implement` skill — drives tdd + code-review            |
+| Plan large fogsgy effort | Load `wayfinder` skill — multi-session decision tickets       |
+| Incoming issues triage   | Load `triage` skill — state machine for issue triage          |
+| Hard bug diagnosis       | Load `diagnosing-bugs` skill — structured debug loop          |
+| Domain modeling          | Load `domain-modeling` skill — sharpens terminology + docs    |
+| Codebase architecture    | Load `improve-codebase-architecture` skill — scans for deepening|
+| Codebase design          | Load `codebase-design` skill — deep module design discipline  |
+| Throwaway prototype      | Load `prototype` skill — quick runnable experiments           |
+| Merge conflicts          | Load `resolving-merge-conflicts` skill — resolve by intent    |
+| Session handoff          | Load `handoff` skill — compact conversation for next session  |
+| Teaching concept         | Load `teach` skill — multi-session structured teaching        |
+| Git safety guardrails    | Load `git-guardrails-claude-code` skill — block dangerous ops |
+| Pre-commit setup         | Load `setup-pre-commit` skill — configure pre-commit hooks    |
+| Writing/editing skills   | Load `writing-great-skills` skill — reference for skill authoring|
+| Research (lightweight)   | Load `research` skill — cited markdown report (complements deep-research)|
+| Watch/analyze a video    | Load `claude-video` (`watch`) skill — frame extraction + transcript analysis|
 
 ### When to Skip Steps
 
@@ -314,6 +380,7 @@ Mandatory report in the following format:
 
 ## Related Skills
 
+### Core Skills (existing)
 - `deep-research`: Multi-source deep research with citations (USE FOR ALL INTERNET ACCESS)
 - `search-first`: Search before implementing to avoid duplication
 - `grill-me`: Interview user about plan before coding (USE FOR AMBIGUOUS REQUESTS)
@@ -331,3 +398,39 @@ Mandatory report in the following format:
 - `error-handling`: Error handling patterns
 - `hexagonal-architecture`: Architecture patterns
 - `production-audit`: Pre-deployment audit
+
+### Claude Video Plugin
+
+- `claude-video` (`/watch`): Watch and analyze videos (URL or local path). Downloads with yt-dlp, extracts frames with ffmpeg, pulls transcripts from captions or Whisper API. Use for: analyzing video content, debugging screen recordings, summarizing talks/lectures, extracting UI/UX feedback from recordings. Dependencies: ffmpeg, yt-dlp.
+
+### Matt Pocock Skills (newly installed)
+
+**Workflow & Planning:**
+- `ask-matt`: Router over all user skills — ask which skill/flow fits your situation
+- `grill-with-docs`: Relentless interview that builds CONTEXT.md and ADRs (USE BEFORE FEATURES)
+- `to-spec`: Synthesize a spec/PRD from the conversation (no interview, just synthesis)
+- `to-tickets`: Break specs/plans into tracer-bullet tickets with blocking edges
+- `implement`: Build from spec/tickets driving tdd + code-review internally
+- `wayfinder`: Plan huge foggy efforts via decision tickets resolved one at a time
+
+**Bug & Issue Management:**
+- `triage`: State machine for incoming issues (needs-triage → ready-for-agent, etc.)
+- `diagnosing-bugs`: Structured debug loop (reproduce → minimise → hypothesise → instrument → fix → regression)
+
+**Code & Architecture Quality:**
+- `improve-codebase-architecture`: Scan codebase for deepening opportunities with HTML report
+- `codebase-design`: Discipline for designing deep modules (small interface, clean seam, testable)
+- `domain-modeling`: Sharpen domain model, update CONTEXT.md and ADRs inline
+- `prototype`: Build throwaway prototypes (terminal app for logic, toggleable UI variations)
+- `resolving-merge-conflicts`: Resolve merge/rebase conflicts by intent, never --abort
+
+**Productivity & Communication:**
+- `grilling`: Reusable loop behind grill-me/grill-with-docs (model-invoked)
+- `handoff`: Compact conversation into handoff document for another agent session
+- `teach`: Multi-session structured teaching with missions and resources
+- `writing-great-skills`: Reference for writing predictable, composable skills
+
+**Safety & Tooling:**
+- `git-guardrails-claude-code`: Block dangerous git operations (push to main, force push, etc.)
+- `setup-pre-commit`: Configure pre-commit hooks for the project
+- `research`: Investigate against high-trust primary sources, produce cited markdown (complements deep-research)
