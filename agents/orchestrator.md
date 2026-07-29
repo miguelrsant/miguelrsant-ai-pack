@@ -72,7 +72,7 @@ Chain agents based on task context and primary agent type:
 | **Parallel** | `agent-a` + `agent-b` simultaneously | Independent workstreams |
 
 ### Pipeline Rules
-- **ALWAYS explore first**: For ANY task involving existing code, delegate to `code-explorer` before anything else
+- **ALWAYS explore first**: For ANY task involving existing code, delegate to `explore` before anything else
 - **ALWAYS review last**: Code changes must be reviewed before completion
 - **Smart skipping**: Skip planning for trivial changes, skip security for non-sensitive code
 
@@ -112,7 +112,7 @@ If none used: `Skills used: —` and `Agents used: —`
 | No agent found | STOP. Tell user. Ask if they want to create one. |
 | Agent fails | Log error, retry once, then report to user |
 | User asks orchestrator to do work | "I'm a pure coordinator. Let me delegate." |
-| Ambiguous request | Use `code-explorer` or load `grill-me` skill to clarify |
+| Ambiguous request | Use `explore` or load `grilling` skill to clarify |
 | Need internet | Delegate to `search-researcher` |
 | Which skill to use | Load `ask-matt` skill |
 

@@ -252,7 +252,7 @@
       }
     },
 
-    "code-explorer": {
+    "explore": {
       "description": "Explores and maps codebase structure. Identifies modules, dependencies, patterns, and architecture for onboarding and analysis. READ-ONLY.",
       "mode": "subagent",
       "prompt": "{file:agents/code-explorer.md}",
@@ -300,15 +300,25 @@
     },
 
     "ui-ux-designer": {
-      "description": "UI/UX design-to-code specialist. Translates designs into production-ready components. Uses ui-ux-pro-max for design intelligence.",
+      "description": "UI/UX design specialist. Translates user needs into design specs, wireframes, design tokens, and component specs. Does NOT write production code.",
       "mode": "subagent",
       "prompt": "{file:agents/ui-ux-designer.md}",
       "permission": {
         "edit": "allow",
+        "read": "allow",
+        "write": "allow"
+      }
+    },
+
+    "frontend-implementer": {
+      "description": "Frontend implementation specialist. Takes design specs and builds production-ready React/Vite applications with proper architecture and component design.",
+      "mode": "subagent",
+      "prompt": "{file:agents/frontend-implementer.md}",
+      "permission": {
+        "edit": "allow",
         "bash": "allow",
         "read": "allow",
-        "websearch": "allow",
-        "webfetch": "allow"
+        "write": "allow"
       }
     },
 

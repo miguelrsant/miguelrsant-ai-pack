@@ -1,6 +1,6 @@
 ---
 name: django-rest-framework
-description: Design and implement production-grade REST APIs with Django REST Framework covering serializers, viewsets, authentication, authorization, versioning, pagination, error contracts, idempotency, throttling, OWASP API security, and OpenAPI documentation.
+description: Design and implement production-grade REST APIs with Django REST Framework covering serializers, viewsets, authentication, authorization, versioning, pagination, error contracts, idempotency, throttling, OWASP API security, OpenAPI documentation, and production readiness validation.
 metadata:
   author: Miguel Angelo
   license: MIT
@@ -178,6 +178,161 @@ urlpatterns += [
 - One error format, one pagination style, one auth story — consistency is the API's UX.
 - Document deprecations in the schema (`deprecated=True`) and give clients a migration window.
 - Prefer additive evolution over new versions; version bumps are a last resort.
+
+## Production Readiness Checklist
+
+### Pre-Implementation Check
+
+- [ ] Business requirements are clearly documented
+- [ ] User stories have acceptance criteria
+- [ ] Success metrics are defined
+- [ ] Edge cases and error scenarios are identified
+
+### Architecture & Design
+
+**Data Modeling**
+- [ ] Database models are defined with proper relationships
+- [ ] Model indexes are planned for query optimization
+- [ ] Migrations strategy considers backward compatibility
+- [ ] Model methods and properties contain business logic, not views
+
+**Serializer Design**
+- [ ] Serializers separate validation/serialization from business logic
+- [ ] Nested serializers used appropriately (avoid deep nesting)
+- [ ] Read-only fields are properly marked
+- [ ] Custom validators used for complex validation rules
+- [ ] Serializer contexts are leveraged (request.user, etc.)
+
+**ViewSet Design**
+- [ ] ViewSets are thin; business logic is in services
+- [ ] Actions are explicitly defined (list, create, retrieve, update, partial_update, destroy)
+- [ ] Permission classes are defined explicitly
+- [ ] Filter backends are configured appropriately
+- [ ] Throttling classes are defined for public endpoints
+
+### Implementation Checklist
+
+- [ ] Write tests BEFORE implementation (TDD)
+- [ ] Implement models first
+- [ ] Create serializers
+- [ ] Implement views/viewsets
+- [ ] Add URLs and routing
+- [ ] Configure permissions
+- [ ] Add authentication if needed
+- [ ] Implement pagination
+- [ ] Add filtering/sorting
+- [ ] Generate/update OpenAPI schema
+
+### Quality Checks
+
+**Query Optimization**
+- [ ] N+1 queries are avoided (use `select_related`, `prefetch_related`)
+- [ ] Query performance verified with django-debug-toolbar
+- [ ] Database indexes created for frequently filtered fields
+- [ ] Pagination implemented for list endpoints
+- [ ] Large datasets handled efficiently (page size limits)
+
+**Security**
+- [ ] Authentication is configured (JWT, Session, OAuth)
+- [ ] Authorization is explicit (permission classes)
+- [ ] Input validation is comprehensive (via serializers)
+- [ ] SQL injection prevention verified (use ORM, not raw SQL)
+- [ ] Rate limiting configured for public endpoints
+- [ ] CORS configured appropriately
+- [ ] Proper error handling without exposing sensitive data
+
+**Testing Coverage**
+- [ ] Model tests defined (CRUD operations)
+- [ ] Serializer tests defined (validation)
+- [ ] ViewSet tests defined (HTTP methods, permissions, filters)
+- [ ] Integration tests defined (request-response flow)
+- [ ] Edge cases and error scenarios tested
+- [ ] Coverage meets minimum threshold (80%+ for critical paths)
+
+**Documentation**
+- [ ] OpenAPI schema generated (drf-spectacular)
+- [ ] Request/response examples provided
+- [ ] Error responses documented
+- [ ] Authentication/authorization requirements are explicit
+- [ ] README or feature documentation updated
+- [ ] Migration notes documented if applicable
+
+### Validation & Verification
+
+- [ ] All tests passing
+- [ ] Linting passes (flake8, black)
+- [ ] mypy type-checking passes
+- [ ] No TODO or FIXME in production code
+- [ ] Dead code removed
+- [ ] Code self-review completed
+- [ ] Pull request created for review
+
+## Delivery Standard
+
+When completing a Django/DRF feature, provide:
+
+1. **Summary**: Brief description of changes (1-2 sentences)
+2. **Files Modified**: List of files changed with line counts
+3. **Migrations Created**: List of new migrations and what they do
+4. **Endpoints Changed**: List of added/modified/removed endpoints
+5. **Tests Added**: List of new tests and coverage changes
+6. **Commands Executed**: Commands used for testing, linting, migration
+7. **Risks Identified**: Any known risks, limitations, or points requiring attention
+8. **Database Performance**: Any query optimizations or index additions
+
+### Delivery Example
+
+```
+Summary: Created order management API with CRUD operations, filtering, and pagination.
+Optimized queries to avoid N+1 issues. Added comprehensive tests (95% coverage).
+
+Files Modified:
+- models/order.py (45 lines)
+- serializers/order.py (68 lines)
+- views/order.py (34 lines)
+- tests/test_orders.py (156 lines)
+- migrations/0003_add_order_model.py (22 lines)
+
+Endpoints Created:
+GET    /api/v1/orders/              - List orders with filtering
+POST   /api/v1/orders/              - Create order
+GET    /api/v1/orders/{id}/         - Get order by ID
+PUT    /api/v1/orders/{id}/         - Update order (full)
+PATCH  /api/v1/orders/{id}/         - Update order (partial)
+DELETE /api/v1/orders/{id}/         - Delete order
+
+Tests Added:
+- Order model tests (CRUD, relations)
+- Order serializer tests (validation, nested fields)
+- Order viewset tests (permissions, filters, pagination)
+- Integration tests (full request-response cycles)
+
+Commands Executed:
+pytest --cov=orders tests/ -v
+flake8 orders/
+black orders/
+mypy orders/
+python manage.py makemigrations orders
+python manage.py migrate orders
+
+Risks Identified:
+- Order creation may be slow with large products (consider async processing)
+- Rate limiting configured but not tested under load
+- Database index needed for status filtering (migration includes)
+```
+
+## Common Mistakes to Avoid
+
+1. **Business Logic in Views**: ViewSets should orchestrate, not contain complex logic. Use services.
+2. **Fat Serializers**: Serializers should validate/serialize, not contain business rules.
+3. **N+1 Queries**: Always optimize queries with `select_related`/`prefetch_related`.
+4. **Skipping Pagination**: List endpoints must paginate to prevent performance issues.
+5. **Hardcoded Permissions**: Use permission classes, not if-statements in views.
+6. **Forgot API Versioning**: Always design for versioning from the start.
+7. **No Error Handling**: Generic error messages frustrate users. Be specific.
+8. **Skipping Query Optimization**: "Works locally" doesn't mean works with production data volumes.
+9. **Incomplete Tests**: Testing happy paths only is not testing.
+10. **No Authorization Review**: Every endpoint must have explicit permission checks.
 
 ## Triggers
 

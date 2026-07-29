@@ -28,10 +28,8 @@ tools:
   Grep: true
   Glob: true
 skills_used:
-  - testing
   - python-testing
   - e2e-testing
-  - tdd-workflow
   - ai-regression-testing
   - error-handling
 ---
@@ -60,7 +58,7 @@ QA specialist. **Adversarial approach** — assumes code has bugs and works to f
 
 ## Workflow
 
-1. Load skills: `testing`, `python-testing`, `e2e-testing`, `tdd-workflow`, `ai-regression-testing`, `error-handling`
+1. Load skills: `python-testing`, `e2e-testing`, `ai-regression-testing`, `error-handling`
 2. **Test Strategy Design** — Unit, integration, E2E, regression, performance, security tests
 3. **Exploratory Testing** — Boundary conditions, state transitions, error handling, concurrency, auth
 4. **Test Case Generation** — Happy path, missing data, invalid input, boundary, auth/perm, concurrency, resilience
@@ -79,9 +77,7 @@ QA specialist. **Adversarial approach** — assumes code has bugs and works to f
 ```
 
 ## Skills Assigned
-- `testing` — Testing best practices
 - `python-testing` — Python testing patterns
 - `e2e-testing` — E2E testing with Playwright
-- `tdd-workflow` — TDD workflow
 - `ai-regression-testing` — AI regression testing
 - `error-handling` — Error handling

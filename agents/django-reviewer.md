@@ -28,7 +28,6 @@ tools:
 skills_used:
   - django
   - django-rest-framework
-  - django-patterns
   - django-security
   - django-tdd
   - django-verification
@@ -51,7 +50,7 @@ Senior Django code reviewer. **Does NOT implement fixes.**
 
 ## Workflow
 
-1. Load skills: `django`, `django-rest-framework`, `django-patterns`, `django-security`, `django-tdd`, `django-verification`
+1. Load skills: `django`, `django-rest-framework`, `django-security`, `django-tdd`, `django-verification`
 2. Run `git diff -- '*.py'`
 3. Run `python manage.py check` if Django project present
 4. Run `ruff check .` and `mypy .` if available
@@ -104,7 +103,6 @@ Fix: What to change
 ## Skills Assigned
 - `django` — Django core
 - `django-rest-framework` — DRF patterns
-- `django-patterns` — Django architecture
 - `django-security` — Django security
 - `django-tdd` — Django testing
 - `django-verification` — Django verification

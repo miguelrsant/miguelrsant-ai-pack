@@ -11,9 +11,9 @@ When to use each design sub-skill.
 | ui-styling | Component implementation | SKILL.md + 7 references + 2 scripts |
 | logo-design | AI logo generation (55 styles, 30 palettes) | SKILL.md + 4 references + 2 scripts |
 | cip-design | Corporate Identity Program (50 deliverables) | SKILL.md + 3 references + 3 scripts |
-| slides | HTML presentations with Chart.js | SKILL.md + 4 references |
-| banner-design | Banners for social, ads, web, print (22 styles) | SKILL.md + 1 reference |
 | icon-design | SVG icon generation (15 styles, Gemini 3.1 Pro) | SKILL.md + 1 reference + 1 script |
+
+> **Note:** Banner design is covered by the comprehensive `design` skill. Presentations use `frontend-slides`.
 
 ## Routing by Task Type
 
@@ -63,15 +63,15 @@ When to use each design sub-skill.
 - Render HTML presentations from CIP mockups
 
 ### Presentation Tasks
-**→ slides**
+**→ frontend-slides**
 
 - Create strategic HTML presentations
-- Data visualization with Chart.js
+- Data visualization with Chart.js data visualization
 - Apply copywriting formulas to slide content
 - Use layout patterns and design tokens
 
 ### Banner Design Tasks
-**→ banner-design**
+**→ design**
 
 - Design banners for social media (Facebook, Twitter, LinkedIn, YouTube, Instagram)
 - Create ad banners (Google Ads, Meta Ads)
@@ -100,12 +100,12 @@ When to use each design sub-skill.
 | "How do I add dark mode?" | ui-styling |
 | "Create a logo for my brand" | logo-design |
 | "Generate business card mockups" | cip-design |
-| "Create a pitch deck" | slides |
+| "Create a pitch deck" | frontend-slides |
 | "Design brand identity package" | cip-design |
 | "What logo style fits my industry?" | logo-design |
-| "Design a Facebook cover" | banner-design |
-| "Create ad banners for Google" | banner-design |
-| "Make a website hero banner" | banner-design |
+| "Design a Facebook cover" | design |
+| "Create ad banners for Google" | design |
+| "Make a website hero banner" | design |
 | "Generate a settings icon" | icon-design |
 | "Create SVG icons for my app" | icon-design |
 | "Design an icon set" | icon-design |
@@ -181,7 +181,7 @@ npx shadcn@latest add button card input
 
 ## When to Use Multiple Skills
 
-Use **all eight** when:
+Use **all skills** when:
 - Complete brand package from scratch (logo → CIP → presentation)
 
 Use **brand + design-system + ui-styling** when:
@@ -190,10 +190,10 @@ Use **brand + design-system + ui-styling** when:
 Use **logo-design + cip-design** when:
 - Complete brand identity package with deliverable mockups
 
-Use **logo-design + cip-design + slides** when:
+Use **logo-design + cip-design + frontend-slides** when:
 - Brand pitch: generate logo, create CIP mockups, build pitch deck
 
-Use **banner-design + brand** when:
+Use **design + brand** when:
 - Social media presence: branded banners across all platforms
 
 Use **icon-design + design-system** when:

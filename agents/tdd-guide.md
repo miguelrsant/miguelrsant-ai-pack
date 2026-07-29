@@ -29,10 +29,8 @@ tools:
   Bash: true
   Grep: true
 skills_used:
-  - tdd-workflow
   - django-tdd
   - python-testing
-  - testing
   - e2e-testing
   - ai-regression-testing
 ---
@@ -54,7 +52,7 @@ Test-Driven Development specialist. Ensures all code is developed test-first wit
 
 ## Workflow
 
-1. Load skills: `tdd-workflow`, `django-tdd`, `python-testing`, `testing`, `e2e-testing`, `ai-regression-testing`
+1. Load skills: `django-tdd`, `python-testing`, `e2e-testing`, `ai-regression-testing`
 2. **RED** — Write a failing test describing expected behavior
 3. **Run Test** — Verify it FAILS (`pytest` or `npm test`)
 4. **GREEN** — Write minimal implementation to make test pass
@@ -81,9 +79,7 @@ Test-Driven Development specialist. Ensures all code is developed test-first wit
 - Coverage is 80%+
 
 ## Skills Assigned
-- `tdd-workflow` — Complete TDD workflow
 - `django-tdd` — TDD with Django
 - `python-testing` — Python testing
-- `testing` — General testing
 - `e2e-testing` — E2E testing
 - `ai-regression-testing` — AI regression testing

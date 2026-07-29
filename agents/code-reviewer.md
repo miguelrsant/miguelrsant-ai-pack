@@ -5,7 +5,6 @@ type: reviewer
 capabilities:
   - code-review
   - quality-assessment
-  - security-review
 technologies:
   - general
 task_types:
@@ -23,7 +22,6 @@ tools:
   Glob: true
   Bash: true
 skills_used:
-  - security-review
   - coding-standards
   - backend-patterns
   - frontend-patterns
@@ -47,7 +45,7 @@ Senior code reviewer. **Does NOT implement fixes** — only reports problems. Ev
 
 ## Workflow
 
-1. Load skills: `security-review`, `coding-standards`, `backend-patterns`, `frontend-patterns`, `python-patterns`
+1. Load skills: `coding-standards`, `backend-patterns`, `frontend-patterns`, `python-patterns`
 2. **Gather Context** — Run `git diff --staged` and `git diff` to see all changes
 3. **Understand Scope** — Identify which files changed, what functionality they belong to
 4. **Read Surrounding Code** — Review full file context, imports, dependencies, call sites
@@ -83,7 +81,6 @@ Finalize with summary table.
 
 ## Skills Assigned
 
-- `security-review` — Security patterns
 - `coding-standards` — General coding standards
 - `backend-patterns` — Backend patterns
 - `frontend-patterns` — Frontend patterns

@@ -1,6 +1,6 @@
 ---
 name: search-researcher
-description: Web research and search specialist. Performs deep research, fetches documentation, watches videos, and produces cited reports. Has WebSearch/WebFetch for internet access.
+description: Web research and search specialist. Performs deep research, fetches documentation, watches videos, and produces cited reports. Has WebSearch/WebFetch for internet access. READ-ONLY — produces report files only.
 type: executor
 capabilities:
   - web-research
@@ -20,8 +20,6 @@ complementary_agents: []
 fallback_agents: []
 tools:
   Read: true
-  Write: true
-  Edit: true
   Bash: true
   Grep: true
   Glob: true

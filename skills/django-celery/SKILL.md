@@ -453,6 +453,6 @@ def charge_and_fulfill(order_id):
 
 ## Related Skills
 
-- `django-patterns` — ORM, service layer, and project structure
+- `django` — ORM, service layer, and project structure
 - `django-tdd` — Testing Django models, views, and services
 - `python-testing` — pytest configuration and fixtures

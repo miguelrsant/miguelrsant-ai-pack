@@ -284,4 +284,4 @@ does not coordinate parallel work or prevent drift.
 - `ai-regression-testing` - regression tests for response-shape and path drift
 - `backend-patterns` - provider-side API and service architecture
 - `frontend-patterns` - consumer-side data access and UI integration
-- `tdd-workflow` - test-first implementation discipline
+- `python-testing` - test-first implementation discipline

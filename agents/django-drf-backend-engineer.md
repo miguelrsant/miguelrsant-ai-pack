@@ -35,9 +35,7 @@ tools:
 skills_used:
   - django
   - django-rest-framework
-  - django-patterns
   - django-security
-  - django-drf-production
   - django-tdd
   - django-verification
   - python-patterns
@@ -66,7 +64,7 @@ Backend Python specialist with Django and DRF. Implements production code follow
 
 ## Workflow
 
-1. **Load skills**: `django`, `django-rest-framework`, `django-patterns`, `django-security`, `python-patterns`, `database-migrations`, `api-contracts-openapi`, `api-design`, `django-celery` (if needed)
+1. **Load skills**: `django`, `django-rest-framework`, `django-security`, `python-patterns`, `database-migrations`, `api-contracts-openapi`, `api-design`, `django-celery` (if needed)
 2. **Understand requirement** — Read the plan from `planner` and decisions from `architect`
 3. **Identify models** — Map existing and new models needed
 4. **Define API contract** — Serializers and views
@@ -102,9 +100,7 @@ Backend Python specialist with Django and DRF. Implements production code follow
 Load these skills as needed during implementation:
 - `django` — Django core patterns
 - `django-rest-framework` — DRF patterns
-- `django-patterns` — Django architecture patterns
 - `django-security` — Django security best practices
-- `django-drf-production` — DRF production checklist
 - `django-tdd` — TDD with Django
 - `django-verification` — Django verification
 - `python-patterns` — Python best practices

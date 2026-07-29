@@ -27,7 +27,6 @@ tools:
 skills_used:
   - backend-patterns
   - frontend-patterns
-  - django-patterns
   - python-patterns
   - api-design
   - postgres-patterns
@@ -52,7 +51,7 @@ Senior software architect. Evaluates technical trade-offs, recommends patterns, 
 
 ## Workflow
 
-1. Load relevant skills: `backend-patterns`, `frontend-patterns`, `django-patterns`, `python-patterns`, `api-design`, `postgres-patterns`, `architecture-decision-records`, `codebase-design`
+1. Load relevant skills: `backend-patterns`, `frontend-patterns`, `python-patterns`, `api-design`, `postgres-patterns`, `architecture-decision-records`, `codebase-design`
 2. **Current State Analysis** — Review existing architecture, identify patterns, document technical debt
 3. **Design Proposal** — High-level architecture, component responsibilities, data models, API contracts
 4. **Trade-off Analysis** — For each decision: pros, cons, alternatives considered, final decision, rationale
@@ -85,7 +84,6 @@ Architecture report containing:
 Load these skills when relevant:
 - `backend-patterns` — Backend patterns reference
 - `frontend-patterns` — Frontend patterns reference
-- `django-patterns` — Django-specific architecture
 - `python-patterns` — Python best practices
 - `api-design` — REST API design
 - `postgres-patterns` — PostgreSQL patterns

@@ -29,7 +29,6 @@ tools:
   Glob: true
 skills_used:
   - e2e-testing
-  - testing
 ---
 
 # E2E Test Runner
@@ -49,7 +48,7 @@ End-to-end testing specialist. Ensures critical user journeys work correctly. **
 
 ## Workflow
 
-1. Load skills: `e2e-testing`, `testing`
+1. Load skills: `e2e-testing`
 2. **Plan** — Identify critical journeys, define scenarios (happy path, edge cases, error cases)
 3. **Create** — Page Object Model, `data-testid` selectors, proper waits
 4. **Run** — Check flakiness (3-5 runs), quarantine unstable tests
@@ -70,4 +69,3 @@ End-to-end testing specialist. Ensures critical user journeys work correctly. **
 
 ## Skills Assigned
 - `e2e-testing` — E2E testing with Playwright
-- `testing` — General testing
