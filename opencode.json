@@ -13,18 +13,17 @@
   },
   "agent": {
     "orchestrator": {
-      "description": "Main engineering flow coordinator. Analyzes requests, delegates to specialist agents, and validates results. Uses deep-research for internet access.",
+      "description": "PURE ORCHESTRATOR. Never writes code, never edits files, never runs bash. ONLY delegates to specialist agents. Routes requests to correct agent based on task type and available skills.",
       "mode": "primary",
       "prompt": "{file:agents/orchestrator.md}",
       "permission": {
-        "edit": "allow",
-        "bash": "allow",
-        "read": "allow"
+        "read": "allow",
+        "task": "allow"
       }
     },
 
     "planner": {
-      "description": "Creates detailed implementation plans before coding. Analyzes requirements, identifies impacted modules, and produces step-by-step plans.",
+      "description": "Creates detailed implementation plans before coding. Analyzes requirements, identifies impacted modules, and produces step-by-step plans. READ-ONLY.",
       "mode": "subagent",
       "prompt": "{file:agents/planner.md}",
       "permission": {
@@ -35,7 +34,7 @@
     },
 
     "architect": {
-      "description": "Reviews architecture decisions and system design. Validates SOLID principles, modularity, scalability, and consistency.",
+      "description": "Reviews architecture decisions and system design. Validates SOLID principles, modularity, scalability, and consistency. READ-ONLY.",
       "mode": "subagent",
       "prompt": "{file:agents/architect.md}",
       "permission": {
@@ -45,7 +44,7 @@
     },
 
     "backend": {
-      "description": "Django/DRF backend engineer specializing in Python. Implements models, serializers, viewsets, permissions, and services.",
+      "description": "Django/DRF backend engineer. Implements models, serializers, viewsets, permissions, and services. Uses Django-specific skills.",
       "mode": "subagent",
       "prompt": "{file:agents/django-drf-backend-engineer.md}",
       "permission": {
@@ -56,7 +55,7 @@
     },
 
     "code-reviewer": {
-      "description": "General code reviewer. Evaluates quality, security, maintainability, bugs, readability, and performance of changes.",
+      "description": "General code reviewer. Evaluates quality, security, maintainability, bugs, readability, and performance. READ-ONLY.",
       "mode": "subagent",
       "prompt": "{file:agents/code-reviewer.md}",
       "permission": {
@@ -66,7 +65,7 @@
     },
 
     "python-reviewer": {
-      "description": "Python-specific code reviewer. Evaluates PEP 8, type hints, Pythonic patterns, security, and performance of Python code.",
+      "description": "Python-specific code reviewer. Evaluates PEP 8, type hints, Pythonic patterns, security, and performance. READ-ONLY.",
       "mode": "subagent",
       "prompt": "{file:agents/python-reviewer.md}",
       "permission": {
@@ -76,7 +75,7 @@
     },
 
     "typescript-reviewer": {
-      "description": "TypeScript/JavaScript-specific code reviewer. Evaluates type safety, async correctness, security, and idiomatic patterns.",
+      "description": "TypeScript/JavaScript code reviewer. Evaluates type safety, async correctness, security, and idiomatic patterns. READ-ONLY.",
       "mode": "subagent",
       "prompt": "{file:agents/typescript-reviewer.md}",
       "permission": {
@@ -86,7 +85,7 @@
     },
 
     "database-reviewer": {
-      "description": "PostgreSQL database reviewer. Evaluates queries, schema, indexes, migrations, RLS, performance, and security.",
+      "description": "PostgreSQL/MySQL database reviewer. Evaluates queries, schema, indexes, migrations, RLS, performance, and security. READ-ONLY.",
       "mode": "subagent",
       "prompt": "{file:agents/database-reviewer.md}",
       "permission": {
@@ -96,7 +95,7 @@
     },
 
     "security-reviewer": {
-      "description": "Security reviewer. Detects OWASP Top 10 vulnerabilities, secrets, injection, auth, XSS, and insecure dependencies.",
+      "description": "Security reviewer. Detects OWASP Top 10 vulnerabilities, secrets, injection, auth, XSS, and insecure dependencies. READ-ONLY.",
       "mode": "subagent",
       "prompt": "{file:agents/security-reviewer.md}",
       "permission": {
@@ -106,7 +105,7 @@
     },
 
     "api-reviewer": {
-      "description": "REST and OpenAPI contract reviewer. Validates endpoints, HTTP methods, status codes, payloads, pagination, and compatibility.",
+      "description": "REST and OpenAPI contract reviewer. Validates endpoints, HTTP methods, status codes, payloads, pagination, and compatibility. READ-ONLY.",
       "mode": "subagent",
       "prompt": "{file:agents/api-contract-reviewer.md}",
       "permission": {
@@ -116,7 +115,7 @@
     },
 
     "tdd": {
-      "description": "Test-Driven Development assistant. Creates and maintains tests following RED -> GREEN -> REFACTOR with minimum 80% coverage.",
+      "description": "Test-Driven Development assistant. Creates tests following RED -> GREEN -> REFACTOR with minimum 80% coverage.",
       "mode": "subagent",
       "prompt": "{file:agents/tdd-guide.md}",
       "permission": {
@@ -127,7 +126,7 @@
     },
 
     "e2e": {
-      "description": "E2E test runner and validator. Creates, maintains, and runs end-to-end tests with Playwright, manages artifacts and flaky tests.",
+      "description": "E2E test runner. Creates and runs end-to-end tests with Playwright, manages artifacts and flaky tests.",
       "mode": "subagent",
       "prompt": "{file:agents/e2e-runner.md}",
       "permission": {
@@ -142,7 +141,8 @@
       "mode": "subagent",
       "prompt": "{file:agents/doc-updater.md}",
       "permission": {
-        "edit": "allow",
+        "edit": "deny",
+        "bash": "allow",
         "read": "allow"
       }
     },
@@ -159,7 +159,7 @@
     },
 
     "production-reviewer": {
-      "description": "Production readiness reviewer. Validates Docker, environment variables, CI/CD, tests, logs, security, healthchecks, and configuration.",
+      "description": "Production readiness reviewer. Validates Docker, environment variables, CI/CD, tests, logs, security, healthchecks, and configuration. READ-ONLY.",
       "mode": "subagent",
       "prompt": "{file:agents/production-readiness-reviewer.md}",
       "permission": {
@@ -169,7 +169,7 @@
     },
 
     "react-reviewer": {
-      "description": "React code reviewer. Evaluates hooks usage, component patterns, performance optimizations, state management, and React best practices.",
+      "description": "React code reviewer. Evaluates hooks usage, component patterns, performance optimizations, state management, and React best practices. READ-ONLY.",
       "mode": "subagent",
       "prompt": "{file:agents/react-reviewer.md}",
       "permission": {
@@ -179,7 +179,7 @@
     },
 
     "react-build-resolver": {
-      "description": "React build error resolver. Fixes webpack/Vite configuration, JSX/TSX compilation, module resolution, and dependency issues in React projects.",
+      "description": "React build error resolver. Fixes Vite/webpack/Next.js/CRA build failures, JSX/TSX compile errors, hydration mismatches.",
       "mode": "subagent",
       "prompt": "{file:agents/react-build-resolver.md}",
       "permission": {
@@ -190,7 +190,7 @@
     },
 
     "fastapi-reviewer": {
-      "description": "FastAPI code reviewer. Evaluates async patterns, dependency injection, Pydantic models, route design, and FastAPI best practices.",
+      "description": "FastAPI code reviewer. Evaluates async patterns, dependency injection, Pydantic models, route design, and FastAPI best practices. READ-ONLY.",
       "mode": "subagent",
       "prompt": "{file:agents/fastapi-reviewer.md}",
       "permission": {
@@ -200,7 +200,7 @@
     },
 
     "django-reviewer": {
-      "description": "Django code reviewer. Evaluates ORM queries, views, middleware, settings, security, and Django best practices.",
+      "description": "Django code reviewer. Evaluates ORM queries, views, middleware, settings, security, and Django best practices. READ-ONLY.",
       "mode": "subagent",
       "prompt": "{file:agents/django-reviewer.md}",
       "permission": {
@@ -210,7 +210,7 @@
     },
 
     "django-build-resolver": {
-      "description": "Django build error resolver. Fixes migration issues, dependency conflicts, settings configuration, and Django-specific build errors.",
+      "description": "Django build error resolver. Fixes migration conflicts, dependency issues, import errors, Django configuration problems.",
       "mode": "subagent",
       "prompt": "{file:agents/django-build-resolver.md}",
       "permission": {
@@ -219,18 +219,20 @@
         "read": "allow"
       }
     },
+
     "performance-optimizer": {
-      "description": "Performance analysis and optimization agent. Identifies bottlenecks, memory leaks, render issues, and provides optimization recommendations.",
+      "description": "Performance analysis and optimization specialist. Identifies bottlenecks, optimizes code, reduces bundle sizes, improves runtime performance.",
       "mode": "subagent",
       "prompt": "{file:agents/performance-optimizer.md}",
       "permission": {
-        "edit": "deny",
+        "edit": "allow",
+        "bash": "allow",
         "read": "allow"
       }
     },
 
     "silent-failure-hunter": {
-      "description": "Finds silent failures, swallowed errors, and edge cases that cause subtle bugs. Reviews error handling patterns across the codebase.",
+      "description": "Finds silent failures, swallowed errors, and edge cases that cause subtle bugs. Reviews error handling patterns. READ-ONLY.",
       "mode": "subagent",
       "prompt": "{file:agents/silent-failure-hunter.md}",
       "permission": {
@@ -244,28 +246,32 @@
       "mode": "subagent",
       "prompt": "{file:agents/code-simplifier.md}",
       "permission": {
-        "edit": "deny",
+        "edit": "allow",
+        "bash": "allow",
         "read": "allow"
       }
     },
 
     "code-explorer": {
-      "description": "Explores and maps codebase structure. Identifies modules, dependencies, patterns, and architecture for onboarding and analysis.",
+      "description": "Explores and maps codebase structure. Identifies modules, dependencies, patterns, and architecture for onboarding and analysis. READ-ONLY.",
       "mode": "subagent",
       "prompt": "{file:agents/code-explorer.md}",
       "permission": {
         "edit": "deny",
+        "bash": "allow",
         "read": "allow"
       }
     },
 
     "spec-miner": {
-      "description": "Extracts specifications from existing code. Identifies contracts, interfaces, data models, and behavioral patterns.",
+      "description": "Extracts behavioral specs from existing codebases for OpenSpec. Produces flat Requirement and Invariant blocks.",
       "mode": "subagent",
       "prompt": "{file:agents/spec-miner.md}",
       "permission": {
         "edit": "deny",
-        "read": "allow"
+        "bash": "allow",
+        "read": "allow",
+        "write": "allow"
       }
     },
 
@@ -283,7 +289,7 @@
     },
 
     "qa-agent": {
-      "description": "Quality Assurance and testing specialist. Designs test strategies, finds bugs, validates edge cases, and enforces quality gates with adversarial testing.",
+      "description": "Quality Assurance specialist. Designs test strategies, finds bugs, validates edge cases, and enforces quality gates with adversarial testing.",
       "mode": "subagent",
       "prompt": "{file:agents/qa-agent.md}",
       "permission": {
@@ -294,9 +300,22 @@
     },
 
     "ui-ux-designer": {
-      "description": "UI/UX design-to-code specialist. Translates designs from Figma, specs, or descriptions into production-ready components with accessibility and responsiveness.",
+      "description": "UI/UX design-to-code specialist. Translates designs into production-ready components. Uses ui-ux-pro-max for design intelligence.",
       "mode": "subagent",
       "prompt": "{file:agents/ui-ux-designer.md}",
+      "permission": {
+        "edit": "allow",
+        "bash": "allow",
+        "read": "allow",
+        "websearch": "allow",
+        "webfetch": "allow"
+      }
+    },
+
+    "search-researcher": {
+      "description": "Web research and search specialist. Performs deep research, fetches documentation, watches videos, and produces cited reports. THE ONLY AGENT with internet access for research.",
+      "mode": "subagent",
+      "prompt": "{file:agents/search-researcher.md}",
       "permission": {
         "edit": "allow",
         "bash": "allow",
