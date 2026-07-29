@@ -1,11 +1,12 @@
 {
+  "$schema": "https://opencode.ai/config.json",
   "default_agent": "orchestrator",
   "skills": {
     "paths": ["./skills"]
   },
   "agent": {
     "orchestrator": {
-      "description": "Main engineering flow coordinator. Analyzes requests, delegates to specialist agents, and validates results.",
+      "description": "Main engineering flow coordinator. Analyzes requests, delegates to specialist agents, and validates results. Uses deep-research for internet access.",
       "mode": "primary",
       "prompt": "{file:agents/orchestrator.md}",
       "permission": {
@@ -108,7 +109,7 @@
     },
 
     "tdd": {
-      "description": "Test-Driven Development assistant. Creates and maintains tests following RED → GREEN → REFACTOR with minimum 80% coverage.",
+      "description": "Test-Driven Development assistant. Creates and maintains tests following RED -> GREEN -> REFACTOR with minimum 80% coverage.",
       "mode": "subagent",
       "prompt": "{file:agents/tdd-guide.md}",
       "permission": {
@@ -154,6 +155,107 @@
       "description": "Production readiness reviewer. Validates Docker, environment variables, CI/CD, tests, logs, security, healthchecks, and configuration.",
       "mode": "subagent",
       "prompt": "{file:agents/production-readiness-reviewer.md}",
+      "permission": {
+        "edit": "deny",
+        "read": "allow"
+      }
+    },
+
+    "react-reviewer": {
+      "description": "React code reviewer. Evaluates hooks usage, component patterns, performance optimizations, state management, and React best practices.",
+      "mode": "subagent",
+      "prompt": "{file:agents/react-reviewer.md}",
+      "permission": {
+        "edit": "deny",
+        "read": "allow"
+      }
+    },
+
+    "react-build-resolver": {
+      "description": "React build error resolver. Fixes webpack/Vite configuration, JSX/TSX compilation, module resolution, and dependency issues in React projects.",
+      "mode": "subagent",
+      "prompt": "{file:agents/react-build-resolver.md}",
+      "permission": {
+        "edit": "allow",
+        "bash": "allow",
+        "read": "allow"
+      }
+    },
+
+    "fastapi-reviewer": {
+      "description": "FastAPI code reviewer. Evaluates async patterns, dependency injection, Pydantic models, route design, and FastAPI best practices.",
+      "mode": "subagent",
+      "prompt": "{file:agents/fastapi-reviewer.md}",
+      "permission": {
+        "edit": "deny",
+        "read": "allow"
+      }
+    },
+
+    "django-reviewer": {
+      "description": "Django code reviewer. Evaluates ORM queries, views, middleware, settings, security, and Django best practices.",
+      "mode": "subagent",
+      "prompt": "{file:agents/django-reviewer.md}",
+      "permission": {
+        "edit": "deny",
+        "read": "allow"
+      }
+    },
+
+    "django-build-resolver": {
+      "description": "Django build error resolver. Fixes migration issues, dependency conflicts, settings configuration, and Django-specific build errors.",
+      "mode": "subagent",
+      "prompt": "{file:agents/django-build-resolver.md}",
+      "permission": {
+        "edit": "allow",
+        "bash": "allow",
+        "read": "allow"
+      }
+    },
+    "performance-optimizer": {
+      "description": "Performance analysis and optimization agent. Identifies bottlenecks, memory leaks, render issues, and provides optimization recommendations.",
+      "mode": "subagent",
+      "prompt": "{file:agents/performance-optimizer.md}",
+      "permission": {
+        "edit": "deny",
+        "read": "allow"
+      }
+    },
+
+    "silent-failure-hunter": {
+      "description": "Finds silent failures, swallowed errors, and edge cases that cause subtle bugs. Reviews error handling patterns across the codebase.",
+      "mode": "subagent",
+      "prompt": "{file:agents/silent-failure-hunter.md}",
+      "permission": {
+        "edit": "deny",
+        "read": "allow"
+      }
+    },
+
+    "code-simplifier": {
+      "description": "Simplifies complex code. Identifies over-engineering, reduces complexity, and suggests cleaner alternatives.",
+      "mode": "subagent",
+      "prompt": "{file:agents/code-simplifier.md}",
+      "permission": {
+        "edit": "deny",
+        "read": "allow"
+      }
+    },
+
+    "code-explorer": {
+      "description": "Explores and maps codebase structure. Identifies modules, dependencies, patterns, and architecture for onboarding and analysis.",
+      "mode": "subagent",
+      "prompt": "{file:agents/code-explorer.md}",
+      "permission": {
+        "edit": "deny",
+        "read": "allow"
+      }
+    },
+
+    "spec-miner": {
+      "description": "Extracts specifications from existing code. Identifies contracts, interfaces, data models, and behavioral patterns.",
+      "mode": "subagent",
+      "prompt": "{file:agents/spec-miner.md}",
       "permission": {
         "edit": "deny",
         "read": "allow"
