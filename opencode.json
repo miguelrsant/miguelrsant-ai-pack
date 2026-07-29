@@ -4,6 +4,13 @@
   "skills": {
     "paths": ["./skills"]
   },
+  "mcp": {
+    "context7": {
+      "type": "local",
+      "command": ["npx", "-y", "@upstash/context7-mcp"],
+      "enabled": true
+    }
+  },
   "agent": {
     "orchestrator": {
       "description": "Main engineering flow coordinator. Analyzes requests, delegates to specialist agents, and validates results. Uses deep-research for internet access.",
@@ -259,6 +266,43 @@
       "permission": {
         "edit": "deny",
         "read": "allow"
+      }
+    },
+
+    "devops-specialist": {
+      "description": "DevOps and infrastructure specialist. Docker, Kubernetes, Terraform, CI/CD pipelines, cloud services, monitoring, and deployment automation.",
+      "mode": "subagent",
+      "prompt": "{file:agents/devops-specialist.md}",
+      "permission": {
+        "edit": "allow",
+        "bash": "allow",
+        "read": "allow",
+        "websearch": "allow",
+        "webfetch": "allow"
+      }
+    },
+
+    "qa-agent": {
+      "description": "Quality Assurance and testing specialist. Designs test strategies, finds bugs, validates edge cases, and enforces quality gates with adversarial testing.",
+      "mode": "subagent",
+      "prompt": "{file:agents/qa-agent.md}",
+      "permission": {
+        "edit": "allow",
+        "bash": "allow",
+        "read": "allow"
+      }
+    },
+
+    "ui-ux-designer": {
+      "description": "UI/UX design-to-code specialist. Translates designs from Figma, specs, or descriptions into production-ready components with accessibility and responsiveness.",
+      "mode": "subagent",
+      "prompt": "{file:agents/ui-ux-designer.md}",
+      "permission": {
+        "edit": "allow",
+        "bash": "allow",
+        "read": "allow",
+        "websearch": "allow",
+        "webfetch": "allow"
       }
     }
   }

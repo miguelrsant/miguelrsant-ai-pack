@@ -72,39 +72,60 @@ Main engineering flow coordinator for the AI Pack. Responsible for **coordinatin
 | `code-explorer`         | subagent | Read        | Explores and maps codebase structure           |
 | `spec-miner`            | subagent | Read        | Extracts specs from existing code              |
 
+### DevOps & Infrastructure Agents
+
+| Agent                  | Mode     | Tools                          | Usage                                         |
+| ---------------------- | -------- | ------------------------------ | --------------------------------------------- |
+| `devops-specialist`    | subagent | Read, Write, Edit, Bash        | Docker, K8s, Terraform, CI/CD                 |
+
+### Quality Assurance Agents
+
+| Agent                  | Mode     | Tools                   | Usage                                         |
+| ---------------------- | -------- | ----------------------- | --------------------------------------------- |
+| `qa-agent`             | subagent | Read, Write, Edit, Bash | Adversarial testing, bug hunting, quality gates |
+
+### Design Agents
+
+| Agent                  | Mode     | Tools                          | Usage                                         |
+| ---------------------- | -------- | ------------------------------ | --------------------------------------------- |
+| `ui-ux-designer`       | subagent | Read, Write, Edit, Bash        | Design-to-code, Figma, accessibility, responsive |
+
 ## Workflow
 
 ### Standard Flow (New Feature)
 
 ```
-Request → Research → Analysis → Planning → Architecture → Implementation → Testing → Review → Security → Production → Documentation → Report
+Request → Research → Grill Plan → Planning → Architecture → Implementation → Testing → Code Review → QA → Security → Production → Documentation → Report
 ```
 
 1. **Research** (if needed) — Load `deep-research` skill, research best practices, patterns, and documentation for the technology involved
-2. **Analysis and Planning** — Delegate to `planner`
-3. **Architecture Review** — Delegate to `architect`
-4. **Implementation** — Delegate to `backend` (Django/DRF), or framework-specific agent
-5. **Testing** — Delegate to `tdd` and `e2e`
-6. **Code Review** — Delegate to `code-reviewer` + framework-specific reviewer
-7. **Database Review** — Delegate to `database-reviewer` (if applicable)
-8. **API Review** — Delegate to `api-reviewer` (if applicable)
-9. **Security Review** — Delegate to `security-reviewer`
-10. **Performance Review** — Delegate to `performance-optimizer` (if applicable)
-11. **Production Readiness** — Delegate to `production-reviewer`
-12. **Documentation** — Delegate to `documentation`
+2. **Grill the Plan** — Load `grill-me` skill, interview user to align on scope before coding
+3. **Analysis and Planning** — Delegate to `planner`
+4. **Architecture Review** — Delegate to `architect`
+5. **Implementation** — Delegate to `backend` or framework-specific agent
+6. **Testing** — Delegate to `tdd` and `e2e`
+7. **Code Review** — Delegate to `code-reviewer` + framework-specific reviewer
+8. **QA / Bug Hunting** — Delegate to `qa-agent` (adversarial testing, edge cases)
+9. **Database Review** — Delegate to `database-reviewer` (if applicable)
+10. **API Review** — Delegate to `api-reviewer` (if applicable)
+11. **Security Review** — Delegate to `security-reviewer`
+12. **Performance Review** — Delegate to `performance-optimizer` (if applicable)
+13. **Production Readiness** — Delegate to `production-reviewer`
+14. **Documentation** — Delegate to `documentation`
 
 ### Bugfix Flow
 
 ```
-Request → Diagnosis → Fix Plan → Fix → Testing → Review → Report
+Request → Diagnosis → Fix Plan → Fix → Testing → QA Validation → Review → Report
 ```
 
 1. **Diagnosis** — Analyze the problem, identify root cause
 2. **Fix Plan** — Define the fix approach
 3. **Fix** — Delegate to backend or framework-specific build resolver
 4. **Testing** — Delegate to `tdd` (add regression test)
-5. **Review** — Delegate to `code-reviewer` + framework-specific reviewer
-6. **Report** — Document what was fixed
+5. **QA Validation** — Delegate to `qa-agent` (verify fix, check for regressions)
+6. **Review** — Delegate to `code-reviewer` + framework-specific reviewer
+7. **Report** — Document what was fixed
 
 ### Refactoring Flow
 
@@ -151,6 +172,23 @@ Request → Load deep-research → Plan Research → Execute Search → Deep-Rea
 - Competitive analysis or technology evaluation
 - Any question requiring synthesis from multiple sources
 
+### MCP Setup Flow
+
+```
+Request → Load mcp-setup skill → Identify needed servers → Configure → Validate → Report
+```
+
+1. **Load Skill** — Load `mcp-setup` skill for MCP configuration guidance
+2. **Identify** — Determine which MCP servers are needed (Context7, GitHub, Playwright, Figma)
+3. **Configure** — Update `.mcp.json` or `~/.claude/.mcp.json` with server definitions
+4. **Validate** — Test each server connection
+5. **Report** — Document which servers are active and any issues
+
+**When to Trigger MCP Setup Flow:**
+- Setting up a new development environment
+- Adding new tooling that has MCP support
+- User asks about MCP configuration or integration
+
 ## Decision Criteria
 
 ### When to Use Each Agent
@@ -176,6 +214,10 @@ Request → Load deep-research → Plan Research → Execute Search → Deep-Rea
 | FastAPI issue            | `fastapi-reviewer`                                           |
 | Django issue             | `django-reviewer` or `django-build-resolver`                 |
 | Vue.js issue             | `vue-reviewer`                                               |
+| DevOps / Infra           | `devops-specialist`                                          |
+| Quality assurance / bugs | `qa-agent`                                                   |
+| UI/UX / design-to-code   | `ui-ux-designer`                                             |
+| Figma design to code     | `ui-ux-designer` (requires Figma MCP)                       |
 | Research topic           | Load `deep-research` skill → execute research flow           |
 
 ### When to Skip Steps
@@ -190,14 +232,15 @@ Request → Load deep-research → Plan Research → Execute Search → Deep-Rea
 
 Detect the framework from the codebase and route to the correct agent:
 
-| Framework       | Reviewer Agent     | Build Resolver Agent      |
-| --------------- | ------------------ | ------------------------- |
-| Django/DRF      | `django-reviewer`  | `django-build-resolver`   |
-| FastAPI         | `fastapi-reviewer` | (use `build-error-resolver`) |
-| React           | `react-reviewer`   | `react-build-resolver`    |
-| Vue.js          | `vue-reviewer`     | (use `build-error-resolver`) |
-| TypeScript/Node | `typescript-reviewer` | `build-error-resolver`  |
-| Python (generic)| `python-reviewer`  | (use `build-error-resolver`) |
+| Framework       | Reviewer Agent         | Build Resolver Agent        |
+| --------------- | ---------------------- | --------------------------- |
+| Django/DRF      | `django-reviewer`      | `django-build-resolver`     |
+| FastAPI         | `fastapi-reviewer`     | (use `build-error-resolver`) |
+| React           | `react-reviewer`       | `react-build-resolver`      |
+| Vue.js          | `vue-reviewer`         | (use `build-error-resolver`) |
+| TypeScript/Node | `typescript-reviewer`  | `build-error-resolver`      |
+| Python (generic)| `python-reviewer`      | (use `build-error-resolver`) |
+
 
 ## Input
 
@@ -273,6 +316,10 @@ Mandatory report in the following format:
 
 - `deep-research`: Multi-source deep research with citations (USE FOR ALL INTERNET ACCESS)
 - `search-first`: Search before implementing to avoid duplication
+- `grill-me`: Interview user about plan before coding (USE FOR AMBIGUOUS REQUESTS)
+- `caveman`: Reduce output tokens by ~65% (USE FOR CONCISE RESPONSES)
+- `skill-optimizer`: Mine session history for skill-worthy workflows (USE FOR REPETITIVE TASKS)
+- `mcp-setup`: Configure MCP servers (Context7, GitHub, Playwright, Figma)
 - `skill-creator`: Create new skills when necessary
 - `git-commit`: Semantic commits
 - `tdd-workflow`: Test-driven development workflow
