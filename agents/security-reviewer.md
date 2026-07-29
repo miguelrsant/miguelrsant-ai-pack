@@ -1,8 +1,11 @@
 ---
 name: security-reviewer
 description: Security reviewer. Detects OWASP Top 10 vulnerabilities, secrets, injection, auth, XSS, and insecure dependencies.
-tools: Read, Grep, Glob, Bash
-model: deepseek/deepseek-v4-flash
+tools:
+  Read: true
+  Grep: true
+  Glob: true
+  Bash: true
 ---
 
 # Security Reviewer
@@ -34,6 +37,7 @@ Security specialist focused on identifying vulnerabilities in web applications. 
 ## Output
 
 Security report containing:
+
 - Vulnerabilities found with severity
 - Exploitation scenario
 - Secure code example
@@ -50,6 +54,7 @@ Security report containing:
 ## Emergency Response
 
 If a CRITICAL vulnerability is found:
+
 1. Document with detailed report
 2. Alert project owner immediately
 3. Provide secure code example

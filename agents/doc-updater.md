@@ -1,8 +1,13 @@
 ---
 name: documentation
 description: Documentation updater. Maintains README, CLAUDE.md, API docs, and codemaps in sync with code.
-tools: Read, Write, Edit, Bash, Grep, Glob
-model: deepseek/deepseek-v4-flash
+tools:
+  Read: true
+  Write: true
+  Edit: true
+  Bash: true
+  Grep: true
+  Glob: true
 ---
 
 # Documentation Specialist

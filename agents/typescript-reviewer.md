@@ -1,8 +1,11 @@
 ---
 name: typescript-reviewer
 description: TypeScript/JavaScript-specific code reviewer. Evaluates type safety, async correctness, security, and idiomatic patterns.
-tools: Read, Grep, Glob, Bash
-model: deepseek/deepseek-v4-flash
+tools:
+  Read: true
+  Grep: true
+  Glob: true
+  Bash: true
 ---
 
 # TypeScript Reviewer
@@ -54,6 +57,7 @@ Fix: Suggestion
 ## Review Priorities
 
 ### CRITICAL — Security
+
 - Injection via `eval` / `new Function`
 - XSS (innerHTML, dangerouslySetInnerHTML)
 - SQL/NoSQL injection (query concatenation)
@@ -61,23 +65,27 @@ Fix: Suggestion
 - Hardcoded secrets (API keys, tokens)
 
 ### HIGH — Type Safety
+
 - `any` without justification
 - Non-null assertion abuse (`value!`)
 - `as` casts that bypass checks
 - Relaxed compiler settings
 
 ### HIGH — Async Correctness
+
 - Unhandled promise rejections
 - Sequential `await` for independent work
 - `async` with `forEach`
 - Floating promises without error handling
 
 ### HIGH — Error Handling
+
 - Empty catch blocks
 - `JSON.parse` without try/catch
 - Throwing non-Error objects
 
 ### MEDIUM — Performance
+
 - Object/array creation in render
 - N+1 queries
 - Missing `React.memo` / `useMemo`

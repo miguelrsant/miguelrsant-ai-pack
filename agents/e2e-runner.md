@@ -1,8 +1,13 @@
 ---
 name: e2e
 description: E2E test runner and validator. Creates, maintains, and runs end-to-end tests with Playwright, manages artifacts and flaky tests.
-tools: Read, Write, Edit, Bash, Grep, Glob
-model: deepseek/deepseek-v4-flash
+tools:
+  Read: true
+  Write: true
+  Edit: true
+  Bash: true
+  Grep: true
+  Glob: true
 ---
 
 # E2E Test Runner

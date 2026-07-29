@@ -1,8 +1,10 @@
 ---
 name: planner
 description: Creates detailed implementation plans before coding. Analyzes requirements, identifies impacted modules, and produces step-by-step plans.
-tools: Read, Grep, Glob
-model: deepseek/deepseek-v4-flash
+tools:
+  Read: true
+  Grep: true
+  Glob: true
 ---
 
 # Planner
@@ -40,29 +42,37 @@ Implementation plan in the following format:
 # Implementation Plan: [Feature Name]
 
 ## Overview
+
 [2-3 sentence summary]
 
 ## Requirements
+
 - [Requirement 1]
 
 ## Architecture Changes
+
 - [File and description of change]
 
 ## Implementation Steps
+
 ### Phase 1: [Name]
+
 1. **[Step Name]** (File: path/to/file)
    - Action: Specific action
    - Dependencies: None / Requires step X
    - Risk: Low/Medium/High
 
 ## Testing Strategy
+
 - Unit tests, integration tests, E2E tests
 
 ## Risks & Mitigations
+
 - **Risk**: Description
   - Mitigation: How to avoid
 
 ## Success Criteria
+
 - [ ] Criterion 1
 ```
 

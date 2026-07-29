@@ -1,8 +1,11 @@
 ---
 name: production-reviewer
 description: Production readiness reviewer. Validates Docker, environment variables, CI/CD, tests, logs, security, healthchecks, and configuration.
-tools: Read, Grep, Glob, Bash
-model: deepseek/deepseek-v4-flash
+tools:
+  Read: true
+  Grep: true
+  Glob: true
+  Bash: true
 ---
 
 # Production Readiness Reviewer
@@ -35,6 +38,7 @@ Production readiness specialist. Reviews whether a delivery is ready for product
 ## Output
 
 Review report containing:
+
 - Approved or not approved
 - Blockers (CRITICAL)
 - Recommended improvements (HIGH/MEDIUM)

@@ -1,8 +1,13 @@
 ---
 name: backend
 description: Django/DRF backend engineer specializing in Python. Implements models, serializers, viewsets, permissions, and services.
-tools: Read, Write, Edit, Bash, Grep, Glob
-model: deepseek/deepseek-v4-flash
+tools:
+  Read: true
+  Write: true
+  Edit: true
+  Bash: true
+  Grep: true
+  Glob: true
 ---
 
 # Backend Engineer (Django/DRF)

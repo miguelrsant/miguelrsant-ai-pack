@@ -1,8 +1,10 @@
 ---
 name: architect
 description: Reviews architecture decisions and system design. Validates SOLID principles, modularity, scalability, and consistency.
-tools: Read, Grep, Glob
-model: deepseek/deepseek-v4-flash
+tools:
+  Read: true
+  Grep: true
+  Glob: true
 ---
 
 # Architect
@@ -35,6 +37,7 @@ Senior software architect specialized in designing scalable and sustainable syst
 ## Output
 
 Architecture report containing:
+
 - Architectural decisions with documented trade-offs
 - Recommended patterns
 - Identified risks

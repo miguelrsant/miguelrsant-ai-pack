@@ -1,8 +1,11 @@
 ---
 name: code-reviewer
 description: General code reviewer. Evaluates quality, security, maintainability, bugs, readability, and performance of changes.
-tools: Read, Grep, Glob, Bash
-model: deepseek/deepseek-v4-flash
+tools:
+  Read: true
+  Grep: true
+  Glob: true
+  Bash: true
 ---
 
 # Code Reviewer
@@ -39,6 +42,7 @@ Senior code reviewer ensuring high quality and security standards. Evaluates bug
 ### HIGH/CRITICAL Findings Require Proof
 
 For any finding marked HIGH or CRITICAL, include:
+
 - The exact snippet and line number
 - The specific failure scenario: input, state, and result
 - Why existing guards (types, validation, framework defaults) do not catch it

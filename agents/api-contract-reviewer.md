@@ -1,8 +1,10 @@
 ---
 name: api-reviewer
 description: REST and OpenAPI contract reviewer. Validates endpoints, HTTP methods, status codes, payloads, pagination, and compatibility.
-tools: Read, Grep, Glob
-model: deepseek/deepseek-v4-flash
+tools:
+  Read: true
+  Grep: true
+  Glob: true
 ---
 
 # API Contract Reviewer
@@ -35,6 +37,7 @@ REST and OpenAPI contract specialist. Reviews endpoints, validates REST conventi
 ## Output
 
 Review report containing:
+
 - Problems found
 - Impact of each problem
 - Correction suggestion

@@ -1,8 +1,13 @@
 ---
 name: build-error-resolver
 description: Build and type error fixer. Resolves TypeScript compilation failures, module errors, and configuration issues with minimal changes.
-tools: Read, Write, Edit, Bash, Grep, Glob
-model: deepseek/deepseek-v4-flash
+tools:
+  Read: true
+  Write: true
+  Edit: true
+  Bash: true
+  Grep: true
+  Glob: true
 ---
 
 # Build Error Resolver

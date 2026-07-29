@@ -1,8 +1,13 @@
 ---
 name: orchestrator
 description: Main engineering flow coordinator. Analyzes requests, delegates to specialist agents, and validates results.
-tools: Read, Write, Edit, Bash, Grep, Glob
-model: deepseek/deepseek-v4-flash
+tools:
+  Read: true
+  Write: true
+  Edit: true
+  Bash: true
+  Grep: true
+  Glob: true
 ---
 
 # Orchestrator
@@ -22,22 +27,22 @@ Main engineering flow coordinator for the AI Pack. Responsible for **coordinatin
 
 ## Available Agent Map
 
-| Agent | Mode | Tools | Usage |
-|-------|------|-------|-------|
-| `planner` | subagent | Read | Creates implementation plans (read-only) |
-| `architect` | subagent | Read | Validates architecture decisions (read-only) |
-| `backend` | subagent | Read, Write, Edit, Bash | Django/DRF implementation |
-| `code-reviewer` | subagent | Read | General code review |
-| `python-reviewer` | subagent | Read | Python-specific review |
-| `typescript-reviewer` | subagent | Read | TypeScript-specific review |
-| `database-reviewer` | subagent | Read | Database review |
-| `security-reviewer` | subagent | Read | Security review |
-| `api-reviewer` | subagent | Read | REST/OpenAPI contract review |
-| `tdd` | subagent | Read, Write, Edit, Bash | Test-driven development |
-| `e2e` | subagent | Read, Write, Edit, Bash | End-to-end testing |
-| `documentation` | subagent | Read, Write, Edit | Documentation updates |
-| `build-error-resolver` | subagent | Read, Write, Edit, Bash | Build error fixes |
-| `production-reviewer` | subagent | Read | Production readiness validation |
+| Agent                  | Mode     | Tools                   | Usage                                        |
+| ---------------------- | -------- | ----------------------- | -------------------------------------------- |
+| `planner`              | subagent | Read                    | Creates implementation plans (read-only)     |
+| `architect`            | subagent | Read                    | Validates architecture decisions (read-only) |
+| `backend`              | subagent | Read, Write, Edit, Bash | Django/DRF implementation                    |
+| `code-reviewer`        | subagent | Read                    | General code review                          |
+| `python-reviewer`      | subagent | Read                    | Python-specific review                       |
+| `typescript-reviewer`  | subagent | Read                    | TypeScript-specific review                   |
+| `database-reviewer`    | subagent | Read                    | Database review                              |
+| `security-reviewer`    | subagent | Read                    | Security review                              |
+| `api-reviewer`         | subagent | Read                    | REST/OpenAPI contract review                 |
+| `tdd`                  | subagent | Read, Write, Edit, Bash | Test-driven development                      |
+| `e2e`                  | subagent | Read, Write, Edit, Bash | End-to-end testing                           |
+| `documentation`        | subagent | Read, Write, Edit       | Documentation updates                        |
+| `build-error-resolver` | subagent | Read, Write, Edit, Bash | Build error fixes                            |
+| `production-reviewer`  | subagent | Read                    | Production readiness validation              |
 
 ## Workflow
 
@@ -100,20 +105,20 @@ Request → Review → Feedback → Fixes → Validation → Report
 
 ### When to Use Each Agent
 
-| Situation | Agent(s) |
-|-----------|----------|
-| New complex feature | `planner` → `architect` → `backend` |
-| Simple bug | `backend` directly |
-| Complex bug | `planner` → `backend` |
-| Refactoring | `architect` → `backend` |
-| Code review | `code-reviewer` + `python-reviewer` or `typescript-reviewer` |
-| Performance issue | `architect` → `backend` |
-| Security concern | `security-reviewer` → `backend` |
-| Database problem | `database-reviewer` → `backend` |
-| API contract | `api-reviewer` → `backend` |
-| Build error | `build-error-resolver` |
-| Prepare for deploy | `production-reviewer` |
-| Update docs | `documentation` |
+| Situation           | Agent(s)                                                     |
+| ------------------- | ------------------------------------------------------------ |
+| New complex feature | `planner` → `architect` → `backend`                          |
+| Simple bug          | `backend` directly                                           |
+| Complex bug         | `planner` → `backend`                                        |
+| Refactoring         | `architect` → `backend`                                      |
+| Code review         | `code-reviewer` + `python-reviewer` or `typescript-reviewer` |
+| Performance issue   | `architect` → `backend`                                      |
+| Security concern    | `security-reviewer` → `backend`                              |
+| Database problem    | `database-reviewer` → `backend`                              |
+| API contract        | `api-reviewer` → `backend`                                   |
+| Build error         | `build-error-resolver`                                       |
+| Prepare for deploy  | `production-reviewer`                                        |
+| Update docs         | `documentation`                                              |
 
 ### When to Skip Steps
 
@@ -134,16 +139,20 @@ Mandatory report in the following format:
 # Execution Report
 
 ## Summary
+
 [Brief description of what was done]
 
 ## Modified Files
+
 - `path/to/file1.ts` — [description of change]
 - `path/to/file2.py` — [description of change]
 
 ## Tests Added/Modified
+
 - [Test name] — [Coverage: X%]
 
 ## Reviews Performed
+
 - [ ] Code Review
 - [ ] Python/TypeScript Review
 - [ ] Security Review
@@ -152,9 +161,11 @@ Mandatory report in the following format:
 - [ ] Production Readiness
 
 ## Risks Identified
+
 - [Risk 1] — [Mitigation]
 
 ## Next Steps
+
 - [Suggestion 1]
 - [Suggestion 2]
 ```

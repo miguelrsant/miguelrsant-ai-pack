@@ -1,8 +1,11 @@
 ---
 name: database-reviewer
 description: PostgreSQL database reviewer. Evaluates queries, schema, indexes, migrations, RLS, performance, and security.
-tools: Read, Grep, Glob, Bash
-model: deepseek/deepseek-v4-flash
+tools:
+  Read: true
+  Grep: true
+  Glob: true
+  Bash: true
 ---
 
 # Database Reviewer
@@ -36,6 +39,7 @@ PostgreSQL database specialist focused on query optimization, schema design, sec
 ## Output
 
 Review report containing:
+
 - Performance problems (slow queries, missing indexes)
 - Schema problems (incorrect types, missing constraints)
 - Security problems (RLS, permissions)

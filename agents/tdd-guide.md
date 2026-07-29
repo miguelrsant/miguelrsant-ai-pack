@@ -1,8 +1,12 @@
 ---
 name: tdd
 description: Test-Driven Development assistant. Creates and maintains tests following RED → GREEN → REFACTOR with minimum 80% coverage.
-tools: Read, Write, Edit, Bash, Grep
-model: deepseek/deepseek-v4-flash
+tools:
+  Read: true
+  Write: true
+  Edit: true
+  Bash: true
+  Grep: true
 ---
 
 # TDD Guide
