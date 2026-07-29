@@ -43,7 +43,10 @@ Each agent prompt file must follow this exact format:
 ---
 name: agent-name
 description: Single sentence describing what the agent does
-tools: Read, Grep, Glob
+tools:
+  Read: true
+  Grep: true
+  Glob: true
 model: haiku (or sonnet/opus depending on complexity)
 ---
 ```
@@ -52,7 +55,7 @@ model: haiku (or sonnet/opus depending on complexity)
 
 - `name`: kebab-case, no spaces, unique across all agents
 - `description`: concise single sentence describing when to use this agent
-- `tools`: comma-separated list of tools the agent needs (Read, Write, Edit, Bash, Grep, Glob)
+- `tools`: YAML mapping object listing tools the agent needs as keys with `true` values (e.g., `Read: true`, `Write: true`, `Edit: true`, `Bash: true`, `Grep: true`, `Glob: true`). Do NOT use comma-separated string format.
 - `model`: model tier recommendation (haiku for simple tasks, sonnet for complex, opus for architecture)
 
 ### Agent Prompt Defense Baseline (REQUIRED)
@@ -210,7 +213,10 @@ Follow least privilege principle:
 ---
 name: your-agent-name
 description: Short description of the agent's purpose
-tools: Read, Grep, Glob
+tools:
+  Read: true
+  Grep: true
+  Glob: true
 ---
 
 ## Prompt Defense Baseline
@@ -280,7 +286,7 @@ tools: Read, Grep, Glob
 - **Wrong permissions**: Grant minimum privilege, not maximum
 - **Overlapping with existing agents**: Check `agents/` directory first
 - **Non-English prompts**: Write agent prompts in English, not other languages
-- **Vague descriptions**: Be specific about what the agent does
+- **Tools as string instead of object**: `tools` must be a YAML mapping object (e.g., `tools:\n  Read: true`), NOT a comma-separated string (e.g., `tools: Read, Grep, Glob`). String format is not parsed correctly by OpenCode.
 - **Missing output format**: Always specify what the agent should return
 
 ## Verification Checklist
