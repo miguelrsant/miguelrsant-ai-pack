@@ -1,0 +1,180 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "skills": {
+    "paths": [
+      "./skills"
+    ]
+  },
+  "agent": {
+    "orchestrator": {
+      "description": "Main engineering flow coordinator. Analyzes requests, delegates to specialist agents, and validates results.",
+      "mode": "primary",
+      "model": "deepseek/deepseek-v4-flash",
+      "prompt": "{file:agents/orchestrator.md}",
+      "permission": {
+        "edit": "allow",
+        "bash": "allow",
+        "read": "allow"
+      }
+    },
+
+    "planner": {
+      "description": "Creates detailed implementation plans before coding. Analyzes requirements, identifies impacted modules, and produces step-by-step plans.",
+      "mode": "subagent",
+      "model": "deepseek/deepseek-v4-flash",
+      "prompt": "{file:agents/planner.md}",
+      "permission": {
+        "edit": "deny",
+        "bash": "deny",
+        "read": "allow"
+      }
+    },
+
+    "architect": {
+      "description": "Reviews architecture decisions and system design. Validates SOLID principles, modularity, scalability, and consistency.",
+      "mode": "subagent",
+      "model": "deepseek/deepseek-v4-flash",
+      "prompt": "{file:agents/architect.md}",
+      "permission": {
+        "edit": "deny",
+        "read": "allow"
+      }
+    },
+
+    "backend": {
+      "description": "Django/DRF backend engineer specializing in Python. Implements models, serializers, viewsets, permissions, and services.",
+      "mode": "subagent",
+      "model": "deepseek/deepseek-v4-flash",
+      "prompt": "{file:agents/django-drf-backend-engineer.md}",
+      "permission": {
+        "edit": "allow",
+        "bash": "allow",
+        "read": "allow"
+      }
+    },
+
+    "code-reviewer": {
+      "description": "General code reviewer. Evaluates quality, security, maintainability, bugs, readability, and performance of changes.",
+      "mode": "subagent",
+      "model": "deepseek/deepseek-v4-flash",
+      "prompt": "{file:agents/code-reviewer.md}",
+      "permission": {
+        "edit": "deny",
+        "read": "allow"
+      }
+    },
+
+    "python-reviewer": {
+      "description": "Python-specific code reviewer. Evaluates PEP 8, type hints, Pythonic patterns, security, and performance of Python code.",
+      "mode": "subagent",
+      "model": "deepseek/deepseek-v4-flash",
+      "prompt": "{file:agents/python-reviewer.md}",
+      "permission": {
+        "edit": "deny",
+        "read": "allow"
+      }
+    },
+
+    "typescript-reviewer": {
+      "description": "TypeScript/JavaScript-specific code reviewer. Evaluates type safety, async correctness, security, and idiomatic patterns.",
+      "mode": "subagent",
+      "model": "deepseek/deepseek-v4-flash",
+      "prompt": "{file:agents/typescript-reviewer.md}",
+      "permission": {
+        "edit": "deny",
+        "read": "allow"
+      }
+    },
+
+    "database-reviewer": {
+      "description": "PostgreSQL database reviewer. Evaluates queries, schema, indexes, migrations, RLS, performance, and security.",
+      "mode": "subagent",
+      "model": "deepseek/deepseek-v4-flash",
+      "prompt": "{file:agents/database-reviewer.md}",
+      "permission": {
+        "edit": "deny",
+        "read": "allow"
+      }
+    },
+
+    "security-reviewer": {
+      "description": "Security reviewer. Detects OWASP Top 10 vulnerabilities, secrets, injection, auth, XSS, and insecure dependencies.",
+      "mode": "subagent",
+      "model": "deepseek/deepseek-v4-flash",
+      "prompt": "{file:agents/security-reviewer.md}",
+      "permission": {
+        "edit": "deny",
+        "read": "allow"
+      }
+    },
+
+    "api-reviewer": {
+      "description": "REST and OpenAPI contract reviewer. Validates endpoints, HTTP methods, status codes, payloads, pagination, and compatibility.",
+      "mode": "subagent",
+      "model": "deepseek/deepseek-v4-flash",
+      "prompt": "{file:agents/api-contract-reviewer.md}",
+      "permission": {
+        "edit": "deny",
+        "read": "allow"
+      }
+    },
+
+    "tdd": {
+      "description": "Test-Driven Development assistant. Creates and maintains tests following RED → GREEN → REFACTOR with minimum 80% coverage.",
+      "mode": "subagent",
+      "model": "deepseek/deepseek-v4-flash",
+      "prompt": "{file:agents/tdd-guide.md}",
+      "permission": {
+        "edit": "allow",
+        "bash": "allow",
+        "read": "allow"
+      }
+    },
+
+    "e2e": {
+      "description": "E2E test runner and validator. Creates, maintains, and runs end-to-end tests with Playwright, manages artifacts and flaky tests.",
+      "mode": "subagent",
+      "model": "deepseek/deepseek-v4-flash",
+      "prompt": "{file:agents/e2e-runner.md}",
+      "permission": {
+        "edit": "allow",
+        "bash": "allow",
+        "read": "allow"
+      }
+    },
+
+    "documentation": {
+      "description": "Documentation updater. Maintains README, CLAUDE.md, API docs, and codemaps in sync with code.",
+      "mode": "subagent",
+      "model": "deepseek/deepseek-v4-flash",
+      "prompt": "{file:agents/doc-updater.md}",
+      "permission": {
+        "edit": "allow",
+        "read": "allow"
+      }
+    },
+
+    "build-error-resolver": {
+      "description": "Build and type error fixer. Resolves TypeScript compilation failures, module errors, and configuration issues with minimal changes.",
+      "mode": "subagent",
+      "model": "deepseek/deepseek-v4-flash",
+      "prompt": "{file:agents/build-error-resolver.md}",
+      "permission": {
+        "edit": "allow",
+        "bash": "allow",
+        "read": "allow"
+      }
+    },
+
+    "production-reviewer": {
+      "description": "Production readiness reviewer. Validates Docker, environment variables, CI/CD, tests, logs, security, healthchecks, and configuration.",
+      "mode": "subagent",
+      "model": "deepseek/deepseek-v4-flash",
+      "prompt": "{file:agents/production-readiness-reviewer.md}",
+      "permission": {
+        "edit": "deny",
+        "read": "allow"
+      }
+    }
+  }
+}
