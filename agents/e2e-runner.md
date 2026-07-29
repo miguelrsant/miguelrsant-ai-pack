@@ -1,6 +1,25 @@
 ---
 name: e2e
 description: E2E test runner. Creates and runs end-to-end tests with Playwright, manages artifacts and flaky tests. Has Write/Edit/Bash for test creation.
+type: executor
+capabilities:
+  - e2e-testing
+  - playwright-automation
+technologies:
+  - playwright
+  - typescript
+task_types:
+  - testing
+  - e2e
+priority: 40
+when_not_to_use:
+  - unit testing
+  - integration testing
+  - implementation
+complementary_agents:
+  - tdd
+  - qa-agent
+fallback_agents: []
 tools:
   Read: true
   Write: true

@@ -1,6 +1,23 @@
 ---
 name: security-reviewer
 description: Security reviewer. Detects OWASP Top 10 vulnerabilities, secrets, injection, auth, XSS, and insecure dependencies. READ-ONLY — only reports problems.
+type: reviewer
+capabilities:
+  - security-audit
+  - vulnerability-detection
+  - owasp-review
+technologies:
+  - general
+task_types:
+  - security-review
+  - review
+priority: 60
+when_not_to_use:
+  - implementation
+  - general code review
+complementary_agents: []
+fallback_agents:
+  - code-reviewer
 tools:
   Read: true
   Grep: true

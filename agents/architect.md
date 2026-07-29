@@ -1,6 +1,25 @@
 ---
 name: architect
 description: Reviews architecture decisions and system design. Validates SOLID principles, modularity, scalability, and consistency. READ-ONLY — never writes code.
+type: reviewer
+capabilities:
+  - architecture-review
+  - system-design
+  - technical-decision-making
+technologies:
+  - general
+task_types:
+  - architecture
+  - design
+  - technical-decision
+priority: 40
+when_not_to_use:
+  - code implementation
+  - bug fixing
+  - testing
+complementary_agents:
+  - planner
+fallback_agents: []
 tools:
   Read: true
   Grep: true

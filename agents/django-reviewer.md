@@ -1,6 +1,25 @@
 ---
 name: django-reviewer
 description: Django code reviewer. Evaluates ORM queries, views, middleware, settings, security, and Django best practices. READ-ONLY — only reports findings.
+type: reviewer
+capabilities:
+  - code-review
+  - django-review
+  - orm-review
+technologies:
+  - python
+  - django
+  - django-rest-framework
+task_types:
+  - review
+priority: 50
+when_not_to_use:
+  - implementation
+  - fastapi review
+complementary_agents:
+  - code-reviewer
+fallback_agents:
+  - code-reviewer
 tools:
   Read: true
   Grep: true

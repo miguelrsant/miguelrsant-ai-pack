@@ -1,6 +1,27 @@
 ---
 name: ui-ux-designer
 description: UI/UX design-to-code specialist. Translates designs from Figma, specs, or descriptions into production-ready components. Uses ui-ux-pro-max for design decisions.
+type: executor
+capabilities:
+  - ui-design
+  - ux-design
+  - frontend-implementation
+  - design-system
+technologies:
+  - react
+  - tailwind
+  - figma
+  - css
+task_types:
+  - design
+  - frontend
+  - ui-ux
+priority: 60
+when_not_to_use:
+  - backend implementation
+  - devops
+complementary_agents: []
+fallback_agents: []
 tools:
   Read: true
   Write: true

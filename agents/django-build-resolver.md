@@ -1,6 +1,24 @@
 ---
 name: django-build-resolver
 description: Django build error resolver. Fixes migration conflicts, dependency issues, import errors, Django configuration. Has Write/Edit/Bash for fixing builds only.
+type: executor
+capabilities:
+  - build-fix
+  - django-build-fix
+  - migration-fix
+technologies:
+  - python
+  - django
+task_types:
+  - build-fix
+priority: 50
+when_not_to_use:
+  - feature implementation
+  - react builds
+complementary_agents:
+  - build-error-resolver
+fallback_agents:
+  - build-error-resolver
 tools:
   Read: true
   Write: true

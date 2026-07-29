@@ -1,6 +1,30 @@
 ---
 name: devops-specialist
 description: DevOps and infrastructure specialist. Docker, Kubernetes, Terraform, CI/CD pipelines, cloud services, monitoring. Has Write/Edit/Bash for infra changes.
+type: executor
+capabilities:
+  - devops
+  - infrastructure
+  - docker
+  - ci-cd
+  - kubernetes
+technologies:
+  - docker
+  - kubernetes
+  - terraform
+  - github-actions
+  - aws
+task_types:
+  - devops
+  - infrastructure
+  - deployment
+priority: 60
+when_not_to_use:
+  - application implementation
+  - frontend design
+complementary_agents:
+  - production-reviewer
+fallback_agents: []
 tools:
   Read: true
   Write: true

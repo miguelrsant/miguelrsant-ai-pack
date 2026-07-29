@@ -1,6 +1,25 @@
 ---
 name: fastapi-reviewer
 description: Reviews FastAPI applications for async correctness, dependency injection, Pydantic schemas, security, OpenAPI quality. READ-ONLY — only reports findings.
+type: reviewer
+capabilities:
+  - code-review
+  - fastapi-review
+  - async-patterns
+technologies:
+  - python
+  - fastapi
+  - pydantic
+task_types:
+  - review
+priority: 50
+when_not_to_use:
+  - implementation
+  - django review
+complementary_agents:
+  - code-reviewer
+fallback_agents:
+  - code-reviewer
 tools:
   Read: true
   Grep: true

@@ -1,6 +1,24 @@
 ---
 name: api-reviewer
 description: REST and OpenAPI contract reviewer. Validates endpoints, HTTP methods, status codes, payloads, pagination, and compatibility. READ-ONLY — only reports problems.
+type: reviewer
+capabilities:
+  - api-review
+  - contract-validation
+  - openapi-validation
+technologies:
+  - rest
+  - openapi
+task_types:
+  - review
+  - api-design
+priority: 50
+when_not_to_use:
+  - implementation
+  - frontend review
+complementary_agents: []
+fallback_agents:
+  - code-reviewer
 tools:
   Read: true
   Grep: true

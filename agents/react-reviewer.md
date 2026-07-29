@@ -1,6 +1,25 @@
 ---
 name: react-reviewer
 description: React code reviewer. Evaluates hooks, render performance, server/client component boundaries, accessibility, and React-specific security. READ-ONLY — only reports findings.
+type: reviewer
+capabilities:
+  - code-review
+  - react-review
+  - frontend-review
+technologies:
+  - react
+  - typescript
+  - javascript
+task_types:
+  - review
+priority: 50
+when_not_to_use:
+  - implementation
+  - backend review
+complementary_agents:
+  - code-reviewer
+fallback_agents:
+  - code-reviewer
 tools:
   Read: true
   Grep: true

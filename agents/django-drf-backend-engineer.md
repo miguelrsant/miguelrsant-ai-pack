@@ -1,6 +1,30 @@
 ---
 name: backend
 description: Django/DRF backend engineer. Implements models, serializers, viewsets, permissions, and services. Has Write/Edit/Bash for implementation only.
+type: executor
+capabilities:
+  - backend-implementation
+  - api-development
+  - database-modeling
+technologies:
+  - python
+  - django
+  - django-rest-framework
+  - postgresql
+task_types:
+  - implementation
+  - bugfix
+  - refactoring
+priority: 60
+when_not_to_use:
+  - frontend implementation
+  - devops
+  - design
+complementary_agents:
+  - tdd
+  - django-reviewer
+fallback_agents:
+  - code-reviewer
 tools:
   Read: true
   Write: true

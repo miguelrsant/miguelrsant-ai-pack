@@ -1,6 +1,24 @@
 ---
 name: planner
 description: Creates detailed implementation plans before coding. Analyzes requirements, identifies impacted modules, and produces step-by-step plans. READ-ONLY — never writes code.
+type: reviewer
+capabilities:
+  - planning
+  - requirements-analysis
+  - impact-assessment
+technologies:
+  - general
+task_types:
+  - planning
+  - analysis
+priority: 30
+when_not_to_use:
+  - code implementation
+  - code review
+  - testing execution
+complementary_agents:
+  - architect
+fallback_agents: []
 tools:
   Read: true
   Grep: true

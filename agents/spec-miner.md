@@ -1,6 +1,22 @@
 ---
 name: spec-miner
 description: Extracts behavioral specs from existing codebases for OpenSpec. Produces flat Requirement and Invariant blocks. READ-ONLY except for openspec/specs/ output.
+type: executor
+capabilities:
+  - spec-extraction
+  - requirements-analysis
+  - behavioral-specs
+technologies:
+  - general
+task_types:
+  - spec-extraction
+  - analysis
+priority: 30
+when_not_to_use:
+  - implementation
+  - testing
+complementary_agents: []
+fallback_agents: []
 tools:
   Read: true
   Grep: true

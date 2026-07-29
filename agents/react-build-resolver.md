@@ -1,6 +1,26 @@
 ---
 name: react-build-resolver
 description: React build error resolver. Fixes Vite/webpack/Next.js/CRA build failures, JSX/TSX compile errors, hydration mismatches. Has Write/Edit/Bash for fixing builds only.
+type: executor
+capabilities:
+  - build-fix
+  - react-build-fix
+  - vite-fix
+technologies:
+  - react
+  - typescript
+  - vite
+  - nextjs
+task_types:
+  - build-fix
+priority: 50
+when_not_to_use:
+  - feature implementation
+  - django builds
+complementary_agents:
+  - build-error-resolver
+fallback_agents:
+  - build-error-resolver
 tools:
   Read: true
   Write: true

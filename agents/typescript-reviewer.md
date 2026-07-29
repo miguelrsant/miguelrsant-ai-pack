@@ -1,6 +1,24 @@
 ---
 name: typescript-reviewer
 description: TypeScript/JavaScript code reviewer. Evaluates type safety, async correctness, security, and idiomatic patterns. READ-ONLY — only reports problems.
+type: reviewer
+capabilities:
+  - code-review
+  - typescript-review
+technologies:
+  - typescript
+  - javascript
+  - node
+task_types:
+  - review
+priority: 40
+when_not_to_use:
+  - implementation
+  - python review
+complementary_agents:
+  - code-reviewer
+fallback_agents:
+  - code-reviewer
 tools:
   Read: true
   Grep: true

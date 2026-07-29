@@ -1,6 +1,24 @@
 ---
 name: production-reviewer
 description: Production readiness reviewer. Validates Docker, env vars, CI/CD, tests, logs, security, healthchecks, and configuration. READ-ONLY — only reports findings.
+type: reviewer
+capabilities:
+  - production-readiness
+  - deployment-review
+  - infrastructure-review
+technologies:
+  - docker
+  - general
+task_types:
+  - review
+  - production-readiness
+priority: 40
+when_not_to_use:
+  - implementation
+  - infrastructure changes
+complementary_agents:
+  - devops-specialist
+fallback_agents: []
 tools:
   Read: true
   Grep: true

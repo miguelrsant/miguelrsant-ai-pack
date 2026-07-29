@@ -1,6 +1,21 @@
 ---
 name: documentation
 description: Documentation updater. Maintains README, CLAUDE.md, API docs, and codemaps in sync with code. Has Write/Edit for documentation files only.
+type: executor
+capabilities:
+  - documentation
+  - api-docs
+  - readme-generation
+technologies:
+  - general
+task_types:
+  - documentation
+priority: 40
+when_not_to_use:
+  - implementation
+  - testing
+complementary_agents: []
+fallback_agents: []
 tools:
   Read: true
   Write: true

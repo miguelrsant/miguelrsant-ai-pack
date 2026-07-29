@@ -1,6 +1,22 @@
 ---
 name: python-reviewer
 description: Python-specific code reviewer. Evaluates PEP 8, type hints, Pythonic patterns, security, and performance. READ-ONLY — only reports problems.
+type: reviewer
+capabilities:
+  - code-review
+  - python-review
+technologies:
+  - python
+task_types:
+  - review
+priority: 40
+when_not_to_use:
+  - implementation
+  - typescript review
+complementary_agents:
+  - code-reviewer
+fallback_agents:
+  - code-reviewer
 tools:
   Read: true
   Grep: true

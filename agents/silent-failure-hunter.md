@@ -1,6 +1,24 @@
 ---
 name: silent-failure-hunter
 description: Review code for silent failures, swallowed errors, bad fallbacks, and missing error propagation. READ-ONLY — only reports findings.
+type: reviewer
+capabilities:
+  - error-detection
+  - silent-failure-analysis
+  - edge-case-analysis
+technologies:
+  - general
+task_types:
+  - review
+  - debugging
+priority: 40
+when_not_to_use:
+  - implementation
+  - feature development
+complementary_agents:
+  - code-reviewer
+fallback_agents:
+  - code-reviewer
 tools:
   Read: true
   Grep: true

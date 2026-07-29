@@ -1,6 +1,22 @@
 ---
 name: code-reviewer
 description: General code reviewer. Evaluates quality, security, maintainability, bugs, readability, and performance changes. READ-ONLY — only reports problems.
+type: reviewer
+capabilities:
+  - code-review
+  - quality-assessment
+  - security-review
+technologies:
+  - general
+task_types:
+  - review
+priority: 20
+when_not_to_use:
+  - implementation
+  - testing
+  - design
+complementary_agents: []
+fallback_agents: []
 tools:
   Read: true
   Grep: true

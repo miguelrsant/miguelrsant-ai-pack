@@ -1,6 +1,26 @@
 ---
 name: database-reviewer
 description: PostgreSQL database reviewer. Evaluates queries, schema, indexes, migrations, RLS, performance, and security. READ-ONLY — only reports problems.
+type: reviewer
+capabilities:
+  - database-review
+  - query-optimization
+  - schema-design
+technologies:
+  - postgresql
+  - mysql
+  - redis
+task_types:
+  - review
+  - database-review
+priority: 50
+when_not_to_use:
+  - implementation
+  - frontend review
+complementary_agents:
+  - backend
+fallback_agents:
+  - code-reviewer
 tools:
   Read: true
   Grep: true

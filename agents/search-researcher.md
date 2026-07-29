@@ -1,6 +1,23 @@
 ---
 name: search-researcher
 description: Web research and search specialist. Performs deep research, fetches documentation, watches videos, and produces cited reports. Has WebSearch/WebFetch for internet access.
+type: executor
+capabilities:
+  - web-research
+  - documentation-lookup
+  - video-analysis
+  - competitive-analysis
+technologies:
+  - general
+task_types:
+  - research
+  - search
+priority: 60
+when_not_to_use:
+  - implementation
+  - code review
+complementary_agents: []
+fallback_agents: []
 tools:
   Read: true
   Write: true

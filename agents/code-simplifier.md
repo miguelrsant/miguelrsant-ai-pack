@@ -1,6 +1,23 @@
 ---
 name: code-simplifier
 description: Simplifies and refines code for clarity, consistency, and maintainability while preserving behavior. Has Write/Edit for applying simplifications.
+type: executor
+capabilities:
+  - refactoring
+  - code-simplification
+  - complexity-reduction
+technologies:
+  - general
+task_types:
+  - refactoring
+  - simplification
+priority: 40
+when_not_to_use:
+  - feature implementation
+  - testing
+complementary_agents:
+  - code-reviewer
+fallback_agents: []
 tools:
   Read: true
   Write: true

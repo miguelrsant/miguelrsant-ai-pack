@@ -1,6 +1,27 @@
 ---
 name: tdd
 description: Test-Driven Development assistant. Creates tests following RED → GREEN → REFACTOR with minimum 80% coverage. Has Write/Edit/Bash for test creation.
+type: executor
+capabilities:
+  - test-driven-development
+  - unit-testing
+  - integration-testing
+technologies:
+  - python
+  - django
+  - pytest
+task_types:
+  - testing
+  - tdd
+priority: 50
+when_not_to_use:
+  - implementation
+  - design
+  - e2e testing only
+complementary_agents:
+  - backend
+  - qa-agent
+fallback_agents: []
 tools:
   Read: true
   Write: true

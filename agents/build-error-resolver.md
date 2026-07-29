@@ -1,6 +1,24 @@
 ---
 name: build-error-resolver
 description: Build and type error fixer. Resolves TypeScript compilation failures, module errors, and configuration issues with minimal changes. Has Write/Edit/Bash for fixing builds only.
+type: executor
+capabilities:
+  - build-fix
+  - type-error-resolution
+technologies:
+  - typescript
+  - general
+task_types:
+  - build-fix
+priority: 30
+when_not_to_use:
+  - feature implementation
+  - refactoring
+  - code review
+complementary_agents:
+  - react-build-resolver
+  - django-build-resolver
+fallback_agents: []
 tools:
   Read: true
   Write: true

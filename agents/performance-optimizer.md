@@ -1,6 +1,22 @@
 ---
 name: performance-optimizer
 description: Performance analysis and optimization specialist. Identifies bottlenecks, optimizes code, reduces bundle sizes, improves runtime performance.
+type: executor
+capabilities:
+  - performance-optimization
+  - profiling
+  - bottleneck-analysis
+technologies:
+  - general
+task_types:
+  - performance
+  - optimization
+priority: 50
+when_not_to_use:
+  - feature implementation
+  - code review (general)
+complementary_agents: []
+fallback_agents: []
 tools:
   Read: true
   Write: true

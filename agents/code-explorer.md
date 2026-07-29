@@ -1,6 +1,24 @@
 ---
 name: code-explorer
 description: DEFAULT agent for exploring and analyzing internal codebase structure. Maps modules, dependencies, execution paths, architecture layers, and patterns. READ-ONLY — never writes code. Always use this agent as the first step for ANY codebase analysis or exploration task.
+type: reviewer
+capabilities:
+  - codebase-exploration
+  - architecture-mapping
+  - dependency-analysis
+  - execution-tracing
+technologies:
+  - general
+task_types:
+  - exploration
+  - analysis
+  - debugging
+priority: 80
+when_not_to_use:
+  - implementation
+  - code modification
+complementary_agents: []
+fallback_agents: []
 tools:
   Read: true
   Grep: true

@@ -1,6 +1,25 @@
 ---
 name: qa-agent
 description: Quality Assurance specialist. Designs test strategies, finds bugs, validates edge cases, enforces quality gates. Has Write/Edit/Bash for test creation.
+type: executor
+capabilities:
+  - quality-assurance
+  - adversarial-testing
+  - bug-hunting
+technologies:
+  - general
+task_types:
+  - testing
+  - qa
+  - regression
+priority: 50
+when_not_to_use:
+  - implementation
+  - architecture design
+complementary_agents:
+  - tdd
+  - e2e
+fallback_agents: []
 tools:
   Read: true
   Write: true
